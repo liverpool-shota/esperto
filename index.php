@@ -9,7 +9,7 @@
   <body>
     <header>
         <div class="container">
-            <div class="header-left"><a href="C:\Users\Bell\OneDrive\デスクトップ\ESPERTO\index.html">FC.ESPERTO</a>
+            <div class="header-left"><a href="index.html">FC.ESPERTO</a>
               <img src="https://www.sanga-fc.jp/assets/img/common/emblem_sanga.svg" class="logo">
             </div>
   
@@ -17,25 +17,25 @@
               <ul class="menu-lists">
                 <li class="menu-list"><a href="#">TEAM</a>
                   <ul class="drop-lists">
-                    <li class="drop-list"><a href="C:\Users\Bell\OneDrive\デスクトップ\ESPERTO\club.html">クラブ概要</a></li>
-                    <li class="drop-list"><a href="C:\Users\Bell\OneDrive\デスクトップ\ESPERTO\member.html">メンバー</a></li>
+                    <li class="drop-list"><a href="club.html">クラブ概要</a></li>
+                    <li class="drop-list"><a href="member.html">メンバー</a></li>
                   </ul>
                 </li>
                 <li class="menu-list"><a href="#">MATCHES</a>
                   <ul class="drop-lists">
-                    <li class="drop-list"><a href="C:\Users\Bell\OneDrive\デスクトップ\ESPERTO\match.html">試合情報</a></li>
-                    <li class="drop-list"><a href="C:\Users\Bell\OneDrive\デスクトップ\ESPERTO\result.html">試合結果</a></li>
-                    <li class="drop-list"><a href="C:\Users\Bell\OneDrive\デスクトップ\ESPERTO\league.html">順位表</a></li>
+                    <li class="drop-list"><a href="match.html">試合情報</a></li>
+                    <li class="drop-list"><a href="result.html">試合結果</a></li>
+                    <li class="drop-list"><a href="league.html">順位表</a></li>
                   </ul>
                 </li>
-                <li class="menu-list"><a href="C:\Users\Bell\OneDrive\デスクトップ\ESPERTO\contact.html">CONTACT US</a></li>
+                <li class="menu-list"><a href="contact.html">CONTACT US</a></li>
                 <li class="menu-list"><a href="https://www.instagram.com/f.c__esperto?utm_source=ig_web_button_share_sheet&igsh=MmVlMjlkMTBhMg==" class="instagram"><span class="fa fa-instagram"></span></a></li>
             </ul>
           </div>
         </div>
     </header>
     <div class="home-wrapper">
-        <div class="container"><img class="photo" src="C:\Users\Bell\OneDrive\デスクトップ\ESPERTO\エスペルト画像\IMG_3871.JPG" width="100">
+        <div class="container"><img class="photo" src="エスペルト画像\IMG_3871.JPG" width="100">
             <h1>PLAY FOR FC.ESPERTO <span>SINCE 1999</span></h1>
             <p>伝統あるチームでともに勝利を目指して！</p>
         </div>
