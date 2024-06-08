@@ -20,18 +20,27 @@ if(isset($_GET["season"])){
   $year = "2024";
 }
 
+
+    // リンクのリストをPHPで定義
+    $links = [
+      "http://localhost/detail.php?result_id=8",
+      "http://localhost/detail.php?result_id=9",
+      "http://localhost/detail.php?result_id=10"
+    ];
+    
+
+
 // データベースへの接続
 try {
     $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
 
     // SQLクエリを準備
-    $sql = "SELECT * FROM results  LEFT JOIN teams as aways ON results.away_team_id = aways.team_id WHERE season = {$year} ;";
+    $sql = "SELECT * FROM results  LEFT JOIN teams as aways ON results.away_team_id = aways.team_id  WHERE season = {$year} ;";
     $rels = $pdo->query($sql);
     $rel = $rels->fetchAll(PDO::FETCH_ASSOC);
     $sql = "SELECT season FROM results;";
     $rows = $pdo->query($sql);
     $row = $rows->fetchAll(PDO::FETCH_ASSOC);
-
 
     //print_r($results);
     //exit;
@@ -40,7 +49,6 @@ catch (PDOException $e) {
     echo "データベースに接続できませんでした：" . $e->getMessage();
     exit;
 }
-
 //seasonデータを準備
 for($i=0; $i<count($row); $i++) {
   $seasons[$i] = $row[$i]["season"];
@@ -51,21 +59,29 @@ for($i=0; $i<count($row); $i++) {
 for($i=0; $i<count($rel); $i++) {
     $results[$i] = $rel[$i];    
 }
-
-
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <meta charset="utf-8">
     <title>FC.ESPERTOオフィシャル</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/stylesheet (1).css">
+    <script>
+        function getDynamicLink() {
+            // PHPで生成されたリンクリストをJavaScript配列として取得
+            var links = <?php echo json_encode($links); ?>;
+            // 適切なリンク先を選択（ここではランダムに選択）
+            var selectedLink = links[Math.floor(Math.random() * links.length)];
+            // 選択されたリンクにリダイレクト
+            window.location.href = selectedLink;
+        }
+    </script>
   </head>
   <body>
-  <header>
+    <header>
       <div class="header-left">
-        <p><a href="index.php">FC.ESPERTO</a><p>
+        <p><a href="index.php">FC.ESPERTO</a></p>
       </div>
 
       <div class="header-center">
@@ -132,7 +148,7 @@ for($i=0; $i<count($rel); $i++) {
     <div class="match-wrapper">
       <div class="container">
         <div class="heading">
-          <h2>試合情報</h2>
+          <h2>試合結果</h2>
           <select id="season">
               <option value="未選択">選択してください</option>
 
@@ -145,28 +161,31 @@ for($i=0; $i<count($rel); $i++) {
                 }
                 }
               ?>
-            </select>
+          </select>
         </div>
         <div class="matches">
           <?php foreach($results as $result): ?>
-          <h4 class='match-title'><?php echo $result["match_category"]; ?></h4>
-          <div class="date"><?php echo $result["match_date"]; ?> KICK OFF</div>
-          <a href='#' class='place'><?php echo $result["place"] ?></a>
-          <div class="match-table">
-            <p class="team-name">FC.ESPERTO</p>
-            <span>VS</span>
-            <p class='team-name'><?php echo $result["team_name"]; ?></p>
-          </div>
-          <?php endforeach ;?>
+           <h4 class='match-title'><?php echo $result["match_category"]; ?></h4>
+           <div class='date'><?php echo $result["match_date"]; ?></div>
+           <a href="#" class='place'><?php echo $result["place"]; ?></a>
+            <div class="match-table">
+              <p class="team-name">FC.ESPERTO</p>
+              <p class='total-score'><?php echo $result["home_half"]+$result["home_goals"]; ?>-<?php echo $result["away_half"]+$result["away_goals"]; ?></p>
+              <p class='team-name'><?php echo $result["team_name"]; ?></p>
+              <span class='half-score'><?php echo $result["home_half"]; ?>-<?php echo $result["away_half"]; ?></span>
+              <span class="half-score"><?php echo $result["home_goals"]; ?>-<?php echo $result["away_goals"]; ?></span>
+              <a href="http://localhost/detail.php?result_id=<?php echo $result["result_id"]; ?>" class="match-detail">試合データ</a>
+            </div>
+          <?php endforeach ; ?>
         </div>
       </div>
     </div>
     <footer>
-      <div class="container">
-        <div class="footer-left">
-          <h2>FC.ESPERTOオフィシャルサイト<br><span>play for ESPERTO, since 1999</span></h2>
+        <div class="container">
+          <div class="footer-left">
+            <h2>FC.ESPERTOオフィシャルサイト<br><span>play for ESPERTO, since 1999</span></h2>
+          </div>
         </div>
-      </div>
     </footer>
     <script>
          document.getElementById("season").addEventListener("change", function() {
@@ -175,7 +194,7 @@ for($i=0; $i<count($rel); $i++) {
           // select要素で選択中のoptionの値を取得
           let selectedValue = selectElement.value;
           //画面を再読み込み
-          window.location.href = "http://localhost/match.php?season=" + selectedValue;
+          window.location.href = "http://localhost/result.php?season=" + selectedValue;
           });
     </script>
     <!-- メニューアイコン -->
@@ -204,5 +223,6 @@ for($i=0; $i<count($rel); $i++) {
 });
 
     </script>
-    </body>
-  </html>
+
+  </body>
+</html>

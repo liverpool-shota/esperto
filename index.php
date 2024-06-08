@@ -1,65 +1,219 @@
+<?php
+/////////////////////////
+//後からコメントを外す
+////////////////////////
+
+// ファイルを読み込む（相対パスで読み込む）
+// require_once 'settings\config.php';
+
+// データベース接続情報
+define('DB_HOST', 'localhost'); // データベースのホスト名
+define('DB_USER', 'root'); // データベースのユーザー名
+define('DB_PASS', ''); // データベースのパスワード
+define('DB_NAME', 'esperto'); // データベース名
+
+
+// リンクのリストをPHPで定義
+$links = [
+  "http://localhost/news.php?news_id=1",
+  "http://localhost/news.php?news_id=2",
+  "http://localhost/news.php?news_id=3"
+];
+
+
+// データベースへの接続
+try {
+    $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
+
+    // SQLクエリを準備
+    $sql = "SELECT * FROM results  LEFT JOIN teams as aways ON results.away_team_id = aways.team_id WHERE season = 2024 ;";
+    $rows = $pdo->query($sql);
+    $row = $rows->fetchAll(PDO::FETCH_ASSOC);
+    $sql = "SELECT * FROM news ORDER BY news_id DESC ;" ;
+    $infs = $pdo->query($sql);
+    $inf = $infs->fetchAll(PDO::FETCH_ASSOC);
+  
+    //print_r($results);
+    //exit;
+
+} 
+catch (PDOException $e) {
+    echo "データベースに接続できませんでした：" . $e->getMessage();
+    exit;
+}
+
+
+for($i=0; $i<count($row); $i++) {
+    $results[$i] = $row[$i];    
+}
+
+for($i=0; $i<count($inf); $i++) {
+  $news[$i] = $inf[$i];
+}
+
+
+?>
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <meta charset="utf-8">
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FC.ESPERTOオフィシャル</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/stylesheet (1).css">
+    <!-- <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="swiper.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="s.css">
+    <link rel="stylesheet" type="text/css" href="a.css">
+
+    <!-- <script>
+        function getDynamicLink() {
+            // PHPで生成されたリンクリストをJavaScript配列として取得
+            var links = <?php echo json_encode($links); ?>;
+            // 適切なリンク先を選択（ここではランダムに選択）
+            var selectedLink = links[Math.floor(Math.random() * links.length)];
+            // 選択されたリンクにリダイレクト
+            window.location.href = selectedLink;
+        }
+    </script> -->
+
   </head>
   <body>
     <header>
-        <div class="container">
-            <div class="header-left"><a href="index.html">FC.ESPERTO</a>
-              <img src="https://www.sanga-fc.jp/assets/img/common/emblem_sanga.svg" class="logo">
-            </div>
-  
-            <div class="header-right">
-              <ul class="menu-lists">
-                <li class="menu-list"><a href="#">TEAM</a>
-                  <ul class="drop-lists">
-                    <li class="drop-list"><a href="club.html">クラブ概要</a></li>
-                    <li class="drop-list"><a href="member.html">メンバー</a></li>
-                  </ul>
-                </li>
-                <li class="menu-list"><a href="#">MATCHES</a>
-                  <ul class="drop-lists">
-                    <li class="drop-list"><a href="match.html">試合情報</a></li>
-                    <li class="drop-list"><a href="result.html">試合結果</a></li>
-                    <li class="drop-list"><a href="league.html">順位表</a></li>
-                  </ul>
-                </li>
-                <li class="menu-list"><a href="contact.html">CONTACT US</a></li>
-                <li class="menu-list"><a href="https://www.instagram.com/f.c__esperto?utm_source=ig_web_button_share_sheet&igsh=MmVlMjlkMTBhMg==" class="instagram"><span class="fa fa-instagram"></span></a></li>
-            </ul>
-          </div>
+      <div class="header-left">
+        <p><a href="index.php">FC.ESPERTO</a></p>
+      </div>
+
+      <div class="header-center">
+        <img class="logo" src="img/esp.logo.png">
+      </div>
+      <!-- メニューアイコン -->
+      <div class="menu-icon" id="menuIcon">&#9776;
+        <div class="sidenav" id="sidenav">
+          <a href="javascript:void(0)" class="closebtn" id="closeBtn">&times;</a>
+          <ul class="options-lists">
+            <li class="option-list"><a href="#">TEAM</a>
+              <ul class="under-lists">
+                <li class="under-list"><a href="club.html">クラブ概要</a></li>
+                <li class="under-list"><a href="member.php">メンバー</a></li>
+              </ul>
+            </li>
+            <li class="option-list"><a href="#">MATCHES</a>
+              <ul class="under-lists">
+                <li class="under-list"><a href="match.php">試合情報</a></li>
+                <li class="under-list"><a href="result.php">試合結果</a></li>
+                <li class="under-list"><a href="league.php">順位表</a></li>
+              </ul>
+            </li>
+            <li class="option-list"><a href="contact.php">CONTACT US</a></li>
+            <li class="option-list">
+              <a href="https://www.instagram.com/f.c__esperto?utm_source=ig_web_button_share_sheet&igsh=MmVlMjlkMTBhMg==" class="instagram">
+                <span class="fa fa-instagram"></span>
+              </a>
+            </li>
+          </ul>
         </div>
+      </div>
+      <div class="header-right">
+        <ul class="menu-lists">
+          <li class="menu-list"><a href="#">TEAM</a>
+            <ul class="drop-lists">
+              <li class="drop-list"><a href="club.html">クラブ概要</a></li>
+              <li class="drop-list"><a href="member.php">メンバー</a></li>
+            </ul>
+          </li>
+          <li class="menu-list"><a href="#">MATCHES</a>
+            <ul class="drop-lists">
+              <li class="drop-list"><a href="match.php">試合情報</a></li>
+              <li class="drop-list"><a href="result.php">試合結果</a></li>
+              <li class="drop-list"><a href="league.php">順位表</a></li>
+            </ul>
+          </li>
+          <li class="menu-list"><a href="contact.php">CONTACT US</a></li>
+          <li class="menu-list">
+            <a href="https://www.instagram.com/f.c__esperto?utm_source=ig_web_button_share_sheet&igsh=MmVlMjlkMTBhMg==" class="instagram">
+              <span class="fa fa-instagram"></span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </header>
     <div class="home-wrapper">
-        <div class="container"><img class="photo" src="エスペルト画像\IMG_3871.JPG" width="100">
-            <h1>PLAY FOR FC.ESPERTO <span>SINCE 1999</span></h1>
+        <img  id="top-img" src="img/IMG_3337.JPG">
+        <div class="container">
+            <h1>PLAY FOR FC.ESPERTO <br>SINCE 1999</h1>
             <p>伝統あるチームでともに勝利を目指して！</p>
         </div>
     </div>
     <div class="match-wrapper">
-      <div class="container">
-        <div class="heading">
-          <h2>MATCH</h2>
-          <p>試合情報</p>
-        </div>
-        <ul class="matches">
-          <a href="#" class="btn match"><li>試合情報</li></a>
-          <a href="#" class="btn result"><li>試合結果</li></a>
-          <a href="#file:///C:/Users/Bell/OneDrive/%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97/HTML_2/league.html" class="btn league-table"><li>順位表</li></a>
-        </ul>
+      <div class="heading">
+        <h2>MATCH</h2>
+        <p>試合日程・結果</p>
       </div>
-      <div class="league" id="file:///C:/Users/Bell/OneDrive/%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97/HTML_2/league.html">順位表</div>
+     <!-- スライドセクション -->
+     <section id="demo03" class="card03 l-section">
+        <div class="swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-watch-progress">
+          <div class="swiper-wrapper" id="swiper-wrapper-ee136ddec2d7545b" aria-live="off" style="cursor: grab; transition-duration: 0ms; transform: translate3d(-2488px, 0px, 0px);">
+            <?php foreach($results as $result): ?>
+            <a href="http://localhost/detail.php?result_id=<?php echo $result["result_id"]; ?>" class="swiper-slide" role="group" aria-label="Slide" data-swiper-slide-index="<?php echo $result["result_id"]; ?>" style="width: 279px; margin-right: 32px;">
+              <article class="slide">
+                <div class="slide-media img-cover">
+                  <img src="img/IMG_3871.JPG" alt="Slide Image">
+                </div>
+                <div class="slide-content">
+                  <div class="match-titles"><?php echo $result['match_category']; ?></div>
+                  <p class="match-date">
+                    <?php echo $result["match_date"]; ?>
+                    <span class="match-place"><?php echo $result['place']; ?></span>
+                  </p>
+                  <div class="match-data">
+                    <span class="teams-name">FC.ESPERTO</span>
+                    <span class="score">
+                      <?php echo $result["home_half"] + $result["home_goals"]; ?> - 
+                      <?php echo $result["away_half"] + $result["away_goals"]; ?>
+                    </span>
+                    <span class="teams-name"><?php echo $result["team_name"]; ?></span>
+                  </div>
+                  <!-- <div class="match-info"><?php echo $result["place"]; ?></div> -->
+                </div>
+              </article>
+            </a>
+            <?php endforeach; ?>
+          </div><!-- /swiper-wrapper -->
+          <div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-ee136ddec2d7545b"></div>
+          <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-ee136ddec2d7545b"></div>
+          <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+        </div><!-- /swiper -->
+      </section>
     </div>
+    
     <div class="news-wrapper">
       <div class="container">
         <div class="heading">
           <h2>NEWS</h2>
           <p>お知らせ</p>
         </div>
+        <!-- ニュースセクション -->
+        <!-- <div id="news" class=" active "> -->
+        <ul class="news">
+          <?php foreach($news as $new): ?>
+          <li>
+            <a href="http://localhost/news.php?news_id=<?php echo $new["news_id"]; ?>">
+              <dl>
+                <dd>
+                  <p class="news-dates">
+                    <?php echo $new["news_date"]; ?>
+                    <span><?php echo $new["categories"]; ?></span>
+                  </p>
+                  <p class="title"><?php echo $new["titles"]; ?></p>
+                  <!-- <i class="fa-solid fa-chevron-right"></i> -->
+                </dd>
+              </dl>
+            </a>
+          </li>
+          <?php endforeach; ?>
+        </ul>
       </div>
     </div>
     <div class="team-wrapper">
@@ -77,13 +231,35 @@
           <h2>CONTACT US</h2>
           <p>お問い合わせ</p>
         </div>
-        <p>お名前（必須）</p>
-        <input>
-        <p>メールアドレス（必須）</p>
-        <input>
-        <p>お問い合わせ内容</p>
-        <textarea></textarea>
-        <p><a href="#" class="btn submit">送信</a></p>
+        <form method="post" action="sent.php">
+            <div class="form-item">お名前（必須）</div>
+            <input type="text" name="name">
+            <div class="form-item">メールアドレス（必須）</div>
+            <input type="text" name="email">
+            <div class="form-item">年齢</div>
+            <select name="age">
+              <option value="未選択">選択してください</option>
+              <?php
+                  $ages = array('10代','20代','30代','40代');
+                  foreach($ages as $age) {
+                    echo "<option value='{$age}'>{$age}</option>";
+                  }
+              ?>
+            </select>
+            <div class="form-item" >お問い合わせの種類</div>
+            <select name="category">
+                <option value="未選択">選択してください</option>
+                <?php
+                    $types = array('練習参加','練習試合','その他');
+                    foreach($types as $type) {
+                        echo "<option value='{$type}'>{$type}</option>";
+                    }
+                ?>
+            </select>
+            <div class="form-item">内容</div>
+            <textarea name="body"></textarea>
+            <p><input type="submit" value="送信" class="btn submit"></p>
+          </form>
       </div>
     </div>
     <footer>
@@ -94,5 +270,97 @@
       </div>
     </footer>
 
+    <script>
+      var images = ["IMG_3337.JPG", "IMG_3338.JPG", "IMG_3870.JPG"]; // 画像のリスト
+      var currentIndex = 0; // 現在の画像のインデックス
+
+      function changeBackgroundImg() {
+        // 現在の画像のインデックスを更新
+        currentIndex = (currentIndex + 1) % images.length;
+        // 要素を取得
+        var element = document.getElementById("top-img");
+        console.log(element);
+        // 背景色を変更
+        element.src= "img/" + images[currentIndex];
+        // element.style.backgroundImage = "url('img/IMG_3337.JPG')";
+      }
+
+      // 1秒ごとに画像を切り替える
+      setInterval(changeBackgroundImg, 2000);
+    </script>
+    <script>
+        function showContent(contentId) {
+            // 全てのコンテンツを非表示にする
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => content.style.display = 'none');
+
+            // 選択されたコンテンツを表示する
+            const selectedContent = document.getElementById(contentId);
+            if (selectedContent) {
+                selectedContent.style.display = 'block';
+            }
+        }
+    </script>
+    <!-- スライド -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="./js/lib/swiper-bundle.min.js"></script>
+    <script src="./js/common.js?22020713"></script>
+    <script>
+      (function() {
+        const mySwiper = new Swiper('.card03 .swiper', {
+          slidesPerView: 1,
+          spaceBetween: 16,
+          loop: true,
+          loopAdditionalSlides: 1,
+          speed: 1000,
+          autoplay: {
+          delay: 4000,
+          disableOnInteraction: false,
+        },
+          grabCursor: true,
+          watchSlidesProgress: true,
+          navigation: {
+          nextEl: '.card03 .swiper-button-next',
+          prevEl: '.card03 .swiper-button-prev',
+        },
+          breakpoints: {
+          600: {
+          slidesPerView: 2,
+        },
+          1025: {
+            slidesPerView: 4,
+            spaceBetween: 32,
+          }
+        },
+      });
+      }());
+    </script>
+
+    <!-- メニューアイコン -->
+    <script src="script.js"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    var menuIcon = document.getElementById("menuIcon");
+    var sidenav = document.getElementById("sidenav");
+    var closeBtn = document.getElementById("closeBtn");
+
+    menuIcon.addEventListener("click", function() {
+        sidenav.style.width = "250px";
+    });
+
+    closeBtn.addEventListener("click", function() {
+        sidenav.style.width = "0";
+    });
+
+    // Close the sidenav if the user clicks outside of it
+    window.addEventListener("click", function(event) {
+        if (!event.target.matches('#menuIcon') && !event.target.closest('.sidenav')) {
+            sidenav.style.width = "0";
+        }
+      });
+    });
+    </script>
+    
   </body>
 </html>

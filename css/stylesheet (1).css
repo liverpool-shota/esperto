@@ -5,6 +5,14 @@ form, input, div {
   margin: 0;
   padding: 0;
 }
+
+*{
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
 a {
     text-decoration: none;
 }
@@ -12,19 +20,35 @@ li {
     list-style: none;
 }
 .container {
-    max-width: 1170px;
+    max-width: 1200px;
     width: 100%;
-    margin: 0 auto;   
+    margin: 0 auto;  
+    padding: 0 50px; 
 }
 
+@media (max-width:1800px){
+    .header-right  {
+        display: none;
+    }
+    .menu-icon{
+        display: block !important;
+    }
+        
+}
+
+
+/* 全ページ適用 */
 header {
-    height: 80px;
+    height: 90px;
     width: 100%;
     position: relative;
     top: auto;
-    
-    z-index: 10;
     background-color: rgba(34, 49, 52, 0.9 );
+    display: flex;
+    align-items: center;
+    z-index: 3;
+    margin: 0;
+
 }
 .header-left a {
     color: #fff;
@@ -32,37 +56,62 @@ header {
 .header-left {
     float: left;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 35px;
+    font-size: 36px;
     color: #fff;
-    width: 200px;
-    margin-top: 20px;
+    width: 33%;
     letter-spacing: 3px; 
+    margin-left: 80px;
+}
+
+.header-left p {
+    text-align: 3px;
+}
+
+.header-center {
+    width: 33%;
+    float: center;
+    text-align: center;
 }
 .logo {
-   width: 50px;
-   margin: -55px 600px;
-   float: left; 
+    height: 80px;
 }
+
 .header-right  {
-    float: right;
-    margin-right: -25px;
+    
+    width: 33%;
+    margin-left: 130px;
 }
+
+.menu-icon {
+    color: white;
+    float: right;
+    font-size: 30px;
+    padding: 20px 110px;
+    display: none;
+    cursor: pointer;
+    user-select: none;
+  }
+
+
 .menu-list  {
     float:left;
+    padding: 0 10px;
 }
+
 .menu-list a {
     color:#fff;
     display: block;
-    line-height: 80px;
-    padding: 0 15px;
+    line-height: 86px;
+    padding: 0 30px;
     transition: all 0.5s;
 }
+
 .menu-list a:hover {
     background-color: rgba(255, 255, 255, 0.3);
 }
 .drop-lists {
     position:absolute;
-    top: 55px;
+    top: 80px;
     display: none;
 }
 .drop-list {
@@ -71,63 +120,177 @@ header {
 .menu-list:hover .drop-lists {
     display: block;
 }
-.home-wrapper {
-    padding: 180px 0 100px 0;
-    background-image: url("C:\Users\Bell\OneDrive\デスクトップ\ESPERTO\エスペルト画像\IMG_3871.JPG");
+/* ハンバーガーメニュー */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.top-wrapper {
+    padding: 90px 0 ;
+    background-color: rgba(11, 17, 18, 0.7);
     background-size: cover;
     text-align: center;
-    color:#fff; 
+    color:#fff;
+    
 }
+.top-wrapper h1 {
+    font-size: 60px;
+    opacity: 0.8;
+}
+
+footer {
+    height: 130px;
+    width: 100%;
+    background-color: rgba(34, 49, 52, 0.9);
+    color:#fff;
+  }
+  .footer-left {
+    float: left;
+    padding: 28px 0;
+  }
+  .footer-left span {
+    font-size: 18px;
+    margin-top: 10px;
+  } 
+
+/* トップページ */
+.home-wrapper {
+    background-size: cover;
+    text-align: center;
+    color:#fbfafafb; 
+}
+
+#top-img {
+    width: 100%;
+    position: relative; /* 相対配置 */
+    z-index: 1;
+}
+
 .home-wrapper h1 {
+    position: absolute;
+    top: 550px;
+    left: 550px;
     font-size: 80px;
     opacity: 0.8;
+    z-index: 3;
 }
 .home-wrapper p {
+    position: absolute;
+    top: 800px;
+    left: 735px;
     font-size: 30px;
     opacity: 0.8;
+    z-index: 3;
 }
-.match-wrapper {
-    padding-bottom: 80px;
-    text-align: center;
+/* トップページ（match） */
+.match-wrapper{
     background-color: #f7f7f7;
+    text-align: center;  
+    padding-bottom: 80px;
+    border-bottom: 0.2px solid #e0e3e3; 
 }
-.heading {
-    padding: 80px 0 50px 0;
-    color:#5f5d60;
+
+.match-titles {
+    font-size: 22px;
+    color: #5f5d60;
+    font-weight: bold;
 }
-.heading h2 {
-    font-size: 45px;
+.match-date {
+    font-size: 18px;
+    margin: 10px 0;
 }
-.heading p {
+.match-place {
+    margin-left: 10px;
+}
+.teams-name {
+    font-size: 18px;
+    margin: 0px 5px;
+    font-weight: bold;
+}
+.score {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* トップページ（news） */
+.news-wrapper {
+    background-color: #f7f7f7;
+    padding-bottom: 80px;   
+    text-align: left; 
+    border-bottom: 0.2px solid #e0e3e3;
+}
+
+.news li {
+    border-bottom: 1px solid #5f5d60;
+    padding: 20px 0;
+}
+
+.news-dates {
     font-size: 18px;
 }
-.btn {
-    display: inline-block;
-    padding: 8px 56px;
-    background-color: #dee7ec;
-    color:#889eab;
+
+.news-dates span {
+    letter-spacing: 2px;
+    color:#fff;
+    border: 2px solid #000;
+    border-radius: 16px;
+    background-color: darkslateblue;
+    padding: 2px 8px;
+    margin-left: 5px;
 }
-.btn:hover {
-    background-color: rgba(113, 116, 118, 0.4);
+
+.title {
+    font-size: 28px;
+    margin-top: 5px;
 }
-.news-wrapper {
-    padding-bottom: 80px;
-    text-align: center;
-    background-color: #f7f7f7; 
-}
-.team-wrapper {
-    padding-bottom: 80px;
-    text-align: center;
+
+/* トップページ（team） */
+.team-wrapper{
     background-color: #f7f7f7;
+    text-align: center;  
+    padding-bottom: 80px;   
+    border-bottom: 0.2px solid #e0e3e3;
 }
+/* トップページ(contact) */
+.contact-wrapper{
+    background-color: #f7f7f7;
+    text-align: center;  
+    padding-bottom: 80px; 
+}
+
 .txt-content {
     text-align: center;
 }
-.contact-wrapper {
-    padding-bottom: 80px;
-    text-align: center;
-    background-color: #f7f7f7; 
-}
+
 input, textarea {
     width: 400px;
     margin: 10px 0 30px 0;
@@ -149,13 +312,88 @@ input, textarea {
   top: 7px;
   background-color: #5dca88;
   opacity: 1;
+} 
+
+.display-contact {
+    width: 70%;
+    margin: 30px auto;
+    padding: 50px;
+    background-color: #e0dddd;
+    color: #333;
+  }
+
+  .form-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 30px;
+  }
+
+  .form-item {
+    padding: 20px 0 10px 0;
+    font-weight: bold;
+  }
+
+  input[type="text"] {
+    width: 30%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 12px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555;
+  }
+
+
+
+/* ニュースページ */
+.news-wrap{
+    padding-bottom: 100px;
+    background-color: #f7f7f7;
 }
 
+.news-title {
+    font-size: 40px;
+    margin-bottom: 30px;
+}
 
+.news-date {
+    font-size: 28px;
+    margin-bottom: 80px;
+}
 
+.news-date span {
+    color:#fff;
+    background-color: darkslateblue;
+    border: 2px solid #000;
+    border-radius: 16px;
+    letter-spacing: 2px;
+    padding: 2px 20px;
+    margin-left: 10px;  
 
+}
 
+.contents {
+    font-size: 32px;
+    letter-spacing: 2px;
+}
 
+.photos {
+    display: flex;
+
+}
+
+.photos img {
+    margin: 60px 40px;
+    /* width: 100%; */
+}
+
+/* クラブ概要ページ */
+.club-history {
+    font-size: 40px;
+    width: 100%;
+}
 
 .heading {
     padding: 80px 0 50px 0;
@@ -165,11 +403,10 @@ input, textarea {
     font-size: 45px;
 }
 .heading p {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 table {
-    width:1200px;
     margin: auto;
     border-collapse: collapse;
     background-color: rgb(235, 235, 235);
@@ -186,23 +423,12 @@ th,td {
 }
 
 .txt-content {
-    font-size: 20px;
+    font-size: 28px;
     font-weight: bold;
     margin-bottom: 20px;
 }
 
-.top-wrapper {
-    padding: 50px 0 40px 0;
-    background-color: rgba(11, 17, 18, 0.7);
-    background-size: cover;
-    text-align: center;
-    color:#fff;
-    
-}
-.top-wrapper h1 {
-    font-size: 40px;
-    opacity: 0.8;
-}
+/* メンバーページ */
 .players-wrapper {
     padding-bottom: 80px;
     background-color: #f7f7f7; 
@@ -225,18 +451,17 @@ h3 {
 .playerList__item {
     display: inline-block;
     width: 33%;
-    
     position: relative;
 
 }
 .playerList__item__boxImg img {
     border:  1px solid #5f5d60;
-    width:360px;
+    width: 100%;
 }
 
 .playerList__item__boxNum {
     position: absolute;
-    top: 5px;
+    top: 10px;
     left: 5px;
    
 }
@@ -247,18 +472,18 @@ h3 {
 }
 .position {
     font-style: italic;
-    color:#5f5d60;
+    /* color:#5f5d60; */
     font-size: 30px;
-    margin-left: 3px;
+    margin-left: 5px;
 }
 .playerList__item__boxNames {
     position: relative;
-    bottom: 80px;
+    bottom: 60px;
     left: 10px;
-
+    font-weight: bold;
 }
 .boxNameJp {
-    font-size: 30px;
+    font-size: 100px;
     color:#5f5d60;
 }
 .boxNameEn {
@@ -267,13 +492,7 @@ h3 {
     color:#5f5d60;
 }
 
-
-
-
-
-
-
-
+/* 試合情報,試合結果、試合データページ */
 .heading {
     text-align: center;
     padding: 80px 0 50px 0;
@@ -286,93 +505,34 @@ h3 {
     font-size: 18px;
 }
 .match-title {
-    font-size: 18px;
+    font-size: 28px;
     color: #5f5d60;
 }
 .date {
     text-align: center;
-    font-size: 40px;
+    font-size: 26px;
     color: #5f5d60;
+    margin-top: 10px;
 }
 .place  {
     display: block;
     text-align: center;
-    font-size: 28px;
+    font-size: 26px;
     color:#5f5d60;
+    margin-top: 10px;
 }
 .match-table {
     color:#5f5d60;
     text-align: center;
-    border-top: 2px solid #5f5d60;
     border-bottom: 2px solid #5f5d60;
-    margin: 60px 0;
+    border-top: 0.5px solid rgba(0, 0, 0, 0.1);
+    margin: 20px 0 30px 0;
     padding: 60px 0;
 }
 .team-name {
     display: inline-block;
     letter-spacing: 2px;
-    font-size: 40px;
-}
-.total-score {
-    display:inline-block;
-    font-size: 60px;
-    letter-spacing: 1px;
-    margin: 0 40px 0 50px;
-    
-}
-.half-score {
-    display: block;
-    font-size: 18px;
-    letter-spacing: 3px;
-}
-.match-detail {
-    color:#5f5d60;
-    font-size: 28px;
-    display: inline-block;
-    margin-top: 20px;
-}
-
-
-
-
-.heading {
-    text-align: center;
-    padding: 80px 0 50px 0;
-    color:#5f5d60;
-}
-.heading h2 {
-    font-size: 45px;
-}
-.heading p {
-    font-size: 18px;
-}
-.match-title {
-    font-size: 18px;
-    color: #5f5d60;
-}
-.date {
-    text-align: center;
-    font-size: 28px;
-    color: #5f5d60;
-}
-.place  {
-    display: block;
-    text-align: center;
-    font-size: 20px;
-    color:#5f5d60;
-}
-.match-table {
-    color:#5f5d60;
-    text-align: center;
-    border-top: 2px solid #5f5d60;
-    border-bottom: 2px solid #5f5d60;
-    margin: 30px 0;
-    padding: 30px 0;
-}
-.team-name {
-    display: inline-block;
-    letter-spacing: 2px;
-    font-size: 28px;
+    font-size: 36px;
 }
 .total-score {
     display:inline-block;
@@ -381,9 +541,9 @@ h3 {
     margin: 0 40px 0 50px;
     
 }
-.half-score  {
-    text-align: center;
+.half-score {
     display: block;
+    text-align: center;
     font-size: 18px;
     letter-spacing: 3px;
 }
@@ -394,6 +554,14 @@ h3 {
 .scorer span {
     margin: 0 40px 0 20px;
 }
+
+.match-detail {
+    color:#5f5d60;
+    font-size: 28px;
+    display: inline-block;
+    margin-top: 20px;
+}
+
 h5 {
     text-align: center;
     border: 1px solid #5f5d60;
@@ -404,13 +572,15 @@ h5 {
     padding: 10px 0;
     margin: 60px 0;
 }
+
 .detail-wrapper p {
     font-size: 18px;
     color:#5f5d60;
     margin:30px 0 10px 0;
 }
+
 table {
-    width:1000px;
+    width:100%;
     border-collapse: collapse;
     background-color: rgb(235, 235, 235);
 }
@@ -442,9 +612,7 @@ h6 {
     letter-spacing:1px;
 }
 
-
-
-
+/* 順位表ページ */
 .league_table-wrapper {
     padding-bottom: 100px;
     text-align: center;
@@ -461,7 +629,7 @@ h6 {
     letter-spacing: 3px;
   }
   table {
-   width:1200px;
+   width: 100%;
    margin: auto;
    border-collapse: collapse;
    background-color: rgb(235, 235, 235);
@@ -495,24 +663,8 @@ h6 {
     margin-right: 10px;
   }
 
-
-
- footer {
-    height: 100px;
-    width: 100%;
-    background-color: rgba(34, 49, 52, 0.9);
-    color:#fff;
-  }
-  .footer-left {
-    float: left;
-    padding: 5px 0;
-  }
-  .footer-left span {
-    font-size: 12px;
-  } 
-.team:hover .culb {
+/* .team:hover .culb {
     display:inline
-}
-
+} */
 
 

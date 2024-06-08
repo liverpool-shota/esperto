@@ -13,11 +13,11 @@ define('DB_PASS', ''); // データベースのパスワード
 define('DB_NAME', 'esperto'); // データベース名
 
 //クエリパラメータ（season）を取得
-if(isset($_GET["season"])){
+if(isset($_GET["news_id"])){
   //サニタイズ後に変数に格納
-  $year = htmlspecialchars($_GET["season"]);
+  $news_id = htmlspecialchars($_GET["news_id"]);
 }else{
-  $year = "2024";
+  $news_id = "2";
 }
 
 // データベースへの接続
@@ -25,10 +25,7 @@ try {
     $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
 
     // SQLクエリを準備
-    $sql = "SELECT * FROM results  LEFT JOIN teams as aways ON results.away_team_id = aways.team_id WHERE season = {$year} ;";
-    $rels = $pdo->query($sql);
-    $rel = $rels->fetchAll(PDO::FETCH_ASSOC);
-    $sql = "SELECT season FROM results;";
+    $sql = "SELECT * FROM news WHERE news_id = {$news_id} ;";
     $rows = $pdo->query($sql);
     $row = $rows->fetchAll(PDO::FETCH_ASSOC);
 
@@ -48,8 +45,8 @@ for($i=0; $i<count($row); $i++) {
   sort($season);
   }
 
-for($i=0; $i<count($rel); $i++) {
-    $results[$i] = $rel[$i];    
+for($i=0; $i<count($row); $i++) {
+    $news[$i] = $row[$i];    
 }
 
 
@@ -72,34 +69,6 @@ for($i=0; $i<count($rel); $i++) {
         <img class="logo" src="img/esp.logo.png">
       </div>
 
-      <!-- メニューアイコン -->
-      <div class="menu-icon" id="menuIcon">&#9776;
-        <div class="sidenav" id="sidenav">
-          <a href="javascript:void(0)" class="closebtn" id="closeBtn">&times;</a>
-          <ul class="options-lists">
-            <li class="option-list"><a href="#">TEAM</a>
-              <ul class="under-lists">
-                <li class="under-list"><a href="club.html">クラブ概要</a></li>
-                <li class="under-list"><a href="member.php">メンバー</a></li>
-              </ul>
-            </li>
-            <li class="option-list"><a href="#">MATCHES</a>
-              <ul class="under-lists">
-                <li class="under-list"><a href="match.php">試合情報</a></li>
-                <li class="under-list"><a href="result.php">試合結果</a></li>
-                <li class="under-list"><a href="league.php">順位表</a></li>
-              </ul>
-            </li>
-            <li class="option-list"><a href="contact.php">CONTACT US</a></li>
-            <li class="option-list">
-              <a href="https://www.instagram.com/f.c__esperto?utm_source=ig_web_button_share_sheet&igsh=MmVlMjlkMTBhMg==" class="instagram">
-                <span class="fa fa-instagram"></span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <!-- <span class= "menu-icon fa fa-bars"></span> -->
       <div class="header-right">
         <ul class="menu-lists">
           <li class="menu-list"><a href="#">TEAM</a>
@@ -126,14 +95,14 @@ for($i=0; $i<count($rel); $i++) {
     </header>
     <div class="top-wrapper">
         <div class="container">
-          <h1>MATCH</h1>
+          <h1>NEWS</h1>
         </div>
     </div>
-    <div class="match-wrapper">
+    <div class="news-wrap">
       <div class="container">
         <div class="heading">
-          <h2>試合情報</h2>
-          <select id="season">
+          <h2>お知らせ</h2>
+          <!-- <select id="season">
               <option value="未選択">選択してください</option>
 
               <?php
@@ -145,19 +114,22 @@ for($i=0; $i<count($rel); $i++) {
                 }
                 }
               ?>
-            </select>
+            </select> -->
         </div>
-        <div class="matches">
-          <?php foreach($results as $result): ?>
-          <h4 class='match-title'><?php echo $result["match_category"]; ?></h4>
-          <div class="date"><?php echo $result["match_date"]; ?> KICK OFF</div>
-          <a href='#' class='place'><?php echo $result["place"] ?></a>
-          <div class="match-table">
-            <p class="team-name">FC.ESPERTO</p>
-            <span>VS</span>
-            <p class='team-name'><?php echo $result["team_name"]; ?></p>
-          </div>
-          <?php endforeach ;?>
+        <div class="news">
+          <?php foreach($news as $new): ?>
+          <h4 class='news-title'><?php echo $new["titles"]; ?></h4>
+          <p class="news-date">
+            <?php echo $new["news_date"]; ?>
+            <span><?php echo $new["categories"]; ?></span>
+          </p>
+          <div class="contents" ><?php echo $new["contents"]; ?></div>
+          <?php endforeach; ?> 
+          <p class="photos">
+          <img src="img/IMG_3729.JPG" alt="">
+          <span><img src="img/IMG_3730.JPG" alt=""></span>
+          </p>
+          
         </div>
       </div>
     </div>

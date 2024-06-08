@@ -1,78 +1,23 @@
-<?php
-/////////////////////////
-//後からコメントを外す
-////////////////////////
-
-// ファイルを読み込む（相対パスで読み込む）
-// require_once 'settings\config.php';
-
-// データベース接続情報
-define('DB_HOST', 'localhost'); // データベースのホスト名
-define('DB_USER', 'root'); // データベースのユーザー名
-define('DB_PASS', ''); // データベースのパスワード
-define('DB_NAME', 'esperto'); // データベース名
-
-//クエリパラメータ（season）を取得
-if(isset($_GET["season"])){
-  //サニタイズ後に変数に格納
-  $year = htmlspecialchars($_GET["season"]);
-}else{
-  $year = "2024";
-}
-
-// データベースへの接続
-try {
-    $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
-
-    // SQLクエリを準備
-    $sql = "SELECT * FROM results  LEFT JOIN teams as aways ON results.away_team_id = aways.team_id WHERE season = {$year} ;";
-    $rels = $pdo->query($sql);
-    $rel = $rels->fetchAll(PDO::FETCH_ASSOC);
-    $sql = "SELECT season FROM results;";
-    $rows = $pdo->query($sql);
-    $row = $rows->fetchAll(PDO::FETCH_ASSOC);
-
-
-    //print_r($results);
-    //exit;
-} 
-catch (PDOException $e) {
-    echo "データベースに接続できませんでした：" . $e->getMessage();
-    exit;
-}
-
-//seasonデータを準備
-for($i=0; $i<count($row); $i++) {
-  $seasons[$i] = $row[$i]["season"];
-  $season = array_unique($seasons);
-  sort($season);
-  }
-
-for($i=0; $i<count($rel); $i++) {
-    $results[$i] = $rel[$i];    
-}
-
-
-?>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FC.ESPERTOオフィシャル</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/stylesheet (1).css">
   </head>
   <body>
-  <header>
-      <div class="header-left">
-        <p><a href="index.php">FC.ESPERTO</a><p>
-      </div>
+      <header>
+        <div class="header-left">
+          <p><a href="index.php">FC.ESPERTO</a><p>
+        </div>
+  
+        <div class="header-center">
+          <img class="logo" src="img/esp.logo.png">
+        </div>
 
-      <div class="header-center">
-        <img class="logo" src="img/esp.logo.png">
-      </div>
-
-      <!-- メニューアイコン -->
+        <!-- メニューアイコン -->
       <div class="menu-icon" id="menuIcon">&#9776;
         <div class="sidenav" id="sidenav">
           <a href="javascript:void(0)" class="closebtn" id="closeBtn">&times;</a>
@@ -123,62 +68,66 @@ for($i=0; $i<count($rel); $i++) {
           </li>
         </ul>
       </div>
-    </header>
-    <div class="top-wrapper">
+      </header>
+      <div class="top-wrapper">
         <div class="container">
-          <h1>MATCH</h1>
+          <h1>CONTACT US</h1>
         </div>
     </div>
-    <div class="match-wrapper">
-      <div class="container">
-        <div class="heading">
-          <h2>試合情報</h2>
-          <select id="season">
+       
+    <div class="contact-wrapper">
+        <div class="container">
+          <div class="heading">
+            <h2>お問い合わせ</h2>
+            <h3>選手募集中、ぜひ一度練習参加を！！<br>練習試合相手も随時募集しています。</h3>
+          </div>
+          <form method="post" action="sent.php">
+            <div class="form-item">お名前（必須）</div>
+            <input type="text" name="name" required>
+            <div class="form-item">メールアドレス（必須）</div>
+            <input type="text" name="email" required>
+            <div class="form-item">年齢</div>
+            <select name="age" required>
               <option value="未選択">選択してください</option>
-
               <?php
-                foreach($season as $s){
-                if($year == $s){
-                  echo "<option value='{$s}' selected>{$s}</option>";
-                }else{
-                  echo "<option value='{$s}'>{$s}</option>";
-                }
-                }
+                  $ages = array('10代','20代','30代','40代');
+                  foreach($ages as $age) {
+                    echo "<option value='{$age}'>{$age}</option>";
+                  }
               ?>
             </select>
+            <div class="form-item" >お問い合わせの種類</div>
+            <select name="category" required>
+                <option value="未選択">選択してください</option>
+                <?php
+                    $types = array('練習参加','練習試合','その他');
+                    foreach($types as $type) {
+                        echo "<option value='{$type}'>{$type}</option>";
+                    }
+                ?>
+            </select>
+            <div class="form-item">内容</div>
+            <textarea name="body" required></textarea>
+            <p><input type="submit" value="送信" class="btn submit"></p>
+          </form>
+          <!-- <p>お名前（必須）</p>
+          <input>
+          <p>メールアドレス（必須）</p>
+          <input>
+          <p>お問い合わせ内容</p>
+          <textarea></textarea>
+          <p><a href="#" class="btn submit">送信</a></p> -->
         </div>
-        <div class="matches">
-          <?php foreach($results as $result): ?>
-          <h4 class='match-title'><?php echo $result["match_category"]; ?></h4>
-          <div class="date"><?php echo $result["match_date"]; ?> KICK OFF</div>
-          <a href='#' class='place'><?php echo $result["place"] ?></a>
-          <div class="match-table">
-            <p class="team-name">FC.ESPERTO</p>
-            <span>VS</span>
-            <p class='team-name'><?php echo $result["team_name"]; ?></p>
+      </div>
+      <footer>
+        <div class="container">
+          <div class="footer-left">
+            <h2>FC.ESPERTOオフィシャルサイト<br><span>play for ESPERTO, since 1999</span></h2>
           </div>
-          <?php endforeach ;?>
         </div>
-      </div>
-    </div>
-    <footer>
-      <div class="container">
-        <div class="footer-left">
-          <h2>FC.ESPERTOオフィシャルサイト<br><span>play for ESPERTO, since 1999</span></h2>
-        </div>
-      </div>
-    </footer>
-    <script>
-         document.getElementById("season").addEventListener("change", function() {
-          // select要素を取得
-          let selectElement = document.getElementById("season");
-          // select要素で選択中のoptionの値を取得
-          let selectedValue = selectElement.value;
-          //画面を再読み込み
-          window.location.href = "http://localhost/match.php?season=" + selectedValue;
-          });
-    </script>
-    <!-- メニューアイコン -->
+      </footer>
+
+      <!-- メニューアイコン -->
     <script src="script.js"></script>
 
     <script>
@@ -204,5 +153,10 @@ for($i=0; $i<count($rel); $i++) {
 });
 
     </script>
+  
     </body>
   </html>
+
+
+
+

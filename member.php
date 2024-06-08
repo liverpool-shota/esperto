@@ -25,30 +25,53 @@ try {
     for($i=0; $i<count($row); $i++) {
         $positions[$i] = $row[$i]["member_pos"];
         $position = array_unique($positions);
-        //$numbers[$i] = $row[$i]["member_num"];
-        //$jnames[$i] = $row[$i]["member_name"];
-        //$enames[$i] = $row[$i]["member_roma_name"];
-    
-        if($row[$i]["member_pos"] == "GK"){
-            $GKs[$i] = $row[$i];
         
-        }elseif($row[$i]["member_pos"] == "DF"){
-            $DFs[$i] = $row[$i];
-        }elseif($row[$i]["member_pos"] == "MF"){
-            $MFs[$i] = $row[$i];
-        }elseif($row[$i]["member_pos"] == "FW"){
-            $FWs[$i] = $row[$i];
-        }
-
     }
 
-    print_r($FWs);
-    exit;
+    //print_r($GKnameE);
+    //exit;
 } 
 catch (PDOException $e) {
     echo "データベースに接続できませんでした：" . $e->getMessage();
     exit;
 }
+
+//GKのデータ用意
+$j = 0;
+for($i=0; $i<count($row); $i++) {
+  if($row[$i]["member_pos"] == "GK") {
+    $gks[$j] = $row[$i];
+    $j++;
+  }
+}
+
+//DFのデータを用意
+$j = 0;
+for($i=0; $i<count($row); $i++) {
+  if($row[$i]["member_pos"] == "DF") {
+    $dfs[$j] = $row[$i];
+    $j++;
+  }
+}
+
+//MFのデータを用意
+$j = 0;
+for($i=0; $i<count($row); $i++) {
+  if($row[$i]["member_pos"] == "MF") {
+    $mfs[$j] = $row[$i];
+    $j++;
+  }
+}
+
+//FWのデータを用意
+$j = 0;
+for($i=0; $i<count($row); $i++) {
+  if($row[$i]["member_pos"] == "FW") {
+    $fws[$j] = $row[$i];
+    $j++;
+  }
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -61,405 +84,195 @@ catch (PDOException $e) {
   </head>
   <body>
     <header>
-        <div class="container">
-            <div class="header-left"><a href="C:\Users\Bell\OneDrive\デスクトップ\ESPERTO\index.html">FC.ESPERTO</a></div>
-            <div class="header-right">
-              <ul class="menu-lists">
-                <li class="menu-list"><a href="#">TEAM</a>
-                  <ul class="drop-lists">
-                    <li class="drop-list"><a href="C:\Users\Bell\OneDrive\デスクトップ\ESPERTO\club.html">クラブ概要</a></li>
-                    <li class="drop-list"><a href="C:\Users\Bell\OneDrive\デスクトップ\ESPERTO\member.html">メンバー</a></li>
-                  </ul>
-                </li>
-                <li class="menu-list"><a href="#">MATCHES</a>
-                  <ul class="drop-lists">
-                    <li class="drop-list"><a href="C:\Users\Bell\OneDrive\デスクトップ\ESPERTO\match.html">試合情報</a></li>
-                    <li class="drop-list"><a href="C:\Users\Bell\OneDrive\デスクトップ\ESPERTO\result.html">試合結果</a></li>
-                    <li class="drop-list"><a href="C:\Users\Bell\OneDrive\デスクトップ\ESPERTO\league.html">順位表</a></li>
-                  </ul>
-                </li>
-                <li class="menu-list"><a href="C:\Users\Bell\OneDrive\デスクトップ\ESPERTO\contact.html">CONTACT US</a></li>
-                <li class="menu-list"><a href="https://www.instagram.com/f.c__esperto?utm_source=ig_web_button_share_sheet&igsh=MmVlMjlkMTBhMg==" class="instagram"><span class="fa fa-instagram"></span></a></li>
+      <div class="header-left">
+        <p><a href="index.php">FC.ESPERTO</a><p>
+      </div>
+
+      <div class="header-center">
+        <img class="logo" src="img/esp.logo.png">
+      </div>
+      <!-- メニューアイコン -->
+      <div class="menu-icon" id="menuIcon">&#9776;
+        <div class="sidenav" id="sidenav">
+          <a href="javascript:void(0)" class="closebtn" id="closeBtn">&times;</a>
+          <ul class="options-lists">
+            <li class="option-list"><a href="#">TEAM</a>
+              <ul class="under-lists">
+                <li class="under-list"><a href="club.html">クラブ概要</a></li>
+                <li class="under-list"><a href="member.php">メンバー</a></li>
+              </ul>
+            </li>
+            <li class="option-list"><a href="#">MATCHES</a>
+              <ul class="under-lists">
+                <li class="under-list"><a href="match.php">試合情報</a></li>
+                <li class="under-list"><a href="result.php">試合結果</a></li>
+                <li class="under-list"><a href="league.php">順位表</a></li>
+              </ul>
+            </li>
+            <li class="option-list"><a href="contact.php">CONTACT US</a></li>
+            <li class="option-list">
+              <a href="https://www.instagram.com/f.c__esperto?utm_source=ig_web_button_share_sheet&igsh=MmVlMjlkMTBhMg==" class="instagram">
+                <span class="fa fa-instagram"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- <span class= "menu-icon fa fa-bars"></span> -->
+      <div class="header-right">
+        <ul class="menu-lists">
+          <li class="menu-list"><a href="#">TEAM</a>
+            <ul class="drop-lists">
+              <li class="drop-list"><a href="club.html">クラブ概要</a></li>
+              <li class="drop-list"><a href="member.php">メンバー</a></li>
             </ul>
-          </div>
-        </div>
+          </li>
+          <li class="menu-list"><a href="#">MATCHES</a>
+            <ul class="drop-lists">
+              <li class="drop-list"><a href="match.php">試合情報</a></li>
+              <li class="drop-list"><a href="result.php">試合結果</a></li>
+              <li class="drop-list"><a href="league.php">順位表</a></li>
+            </ul>
+          </li>
+          <li class="menu-list"><a href="contact.php">CONTACT US</a></li>
+          <li class="menu-list">
+            <a href="https://www.instagram.com/f.c__esperto?utm_source=ig_web_button_share_sheet&igsh=MmVlMjlkMTBhMg==" class="instagram">
+              <span class="fa fa-instagram"></span>
+            </a>
+          </li>
+        </ul>
+      </div>  
     </header>
-    <div class="top-wrapper">
+      <div class="top-wrapper">
         <div class="container">
-            <h1>TEAM</h1>
+          <h1>TEAM</h1>
         </div>
-    </div>
-    <div class="players-wrapper">
+      </div>
+      <div class="players-wrapper">
         <div class="container">
           <h2 class="heading">PLAYERS</h2>
-          <div class="players-all">
-            
+            <div class="players-all">
             <h3>GK</h3>
-            <?php
-                foreach($GKs as $GK)
-                
-                ?>        
-                    
+            <!-- GKデータの書き出し -->
+            <ul class = 'playerList'>
+            <?php foreach($gks as $gk): ?>
+              <li class='playerList__item'>
+                <a href='#'>
+                  <div class='playerList__item__boxNum'>
+                    <span class='number'><?php echo $gk["member_num"]; ?></span>
+                    <span class='position'>GK</span>
+                  </div>
+                  <div class='playerList__item__boxImg'>
+                    <img src='img/soccer.gk.jpg'>
+                  </div>
+                  <div class='playerList__item__boxNames'>
+                    <p class ='boxNameJP'><?php echo $gk["member_name"]; ?></p>
+                    <p class='boxNameEn'><?php echo $gk["member_roma_name"]; ?></p>
+                  </div>
+                </a>
+              </li>
+            <?php endforeach; ?>
+            </ul>
+            <ul class = 'playerList'>
             <h3>DF</h3>
-            <?php
-                foreach($DFs as $DF)
-                
-                ?>     
-                    
+            <!-- DFデータの書き出し -->
+            <?php foreach($dfs as $df): ?>
+              <li class='playerList__item'>
+                <a href='#'>
+                  <div class='playerList__item__boxNum'>
+                    <span class='number'><?php echo $df["member_num"]; ?></span>
+                    <span class='position'>DF</span>
+                  </div>
+                  <div class='playerList__item__boxImg'>
+                    <img src='img/soccer.df.jpg'>
+                  </div>
+                  <div class='playerList__item__boxNames'>
+                    <p class ='boxNameJP'><?php echo $df["member_name"]; ?></p>
+                    <p class='boxNameEn'><?php echo $df["member_roma_name"]; ?></p>
+                  </div>
+                </a>
+              </li>
+            <?php endforeach; ?>
+            </ul>
+            <ul class = 'playerList'>
             <h3>MF</h3>
-            <?php
-                foreach($MFs as $MF)
-                
-                ?>
-                   
+            <!-- MFデータの書き出し -->
+            <?php foreach($mfs as $mf): ?>
+              <li class='playerList__item'>
+                <a href='#'>
+                  <div class='playerList__item__boxNum'>
+                    <span class='number'><?php echo $mf["member_num"]; ?></span>
+                    <span class='position'>MF</span>
+                  </div>
+                  <div class='playerList__item__boxImg'>
+                    <img src='img/soccer.mf.jpg'>
+                  </div>
+                  <div class='playerList__item__boxNames'>
+                    <p class ='boxNameJP'><?php echo $mf["member_name"]; ?></p>
+                    <p class='boxNameEn'><?php echo $mf["member_roma_name"]; ?></p>
+                  </div>
+                </a>
+              </li>
+            <?php endforeach; ?>
+            </ul>
+            <ul class = 'playerList'>
             <h3>FW</h3>
-            <?php
-                foreach($FWs as $FW)
-                
-                ?>
-                    
-            
-            
-            <ul class="playerList">
-                <li class="playerList__item">
-                    <a href="/team/2023/01_wakahara_tomoya">
-                        <div class="playerList__item__boxNum">
-                        <?php
-                
-                            foreach($number as $num){
-                            echo "<span class='number'>{$num}</span>";
-                            }
-                        
-                            foreach($position as $pos){
-
-                            echo "<span class='position'>{$pos}</span>";
-                            }
-                        
-                        ?>
-                        </div>
-                        <div class="playerList__item__boxImg">
-                        <img  src="C:\Users\Bell\Downloads\Shutterstock_580100869.jpg" alt = "">
-                        </div>
-                        <div class="playerList__item__boxNames">
-                        <?php
-                            foreach($jname as $j) {
-
-                            echo "<p class='boxNameJp'>{$j}</p>";
-                            }
-
-                            foreach($enames as $ena){
-
-                            echo "<p class='boxNameEn'>{$ena}</p>";
-                            }
-                        ?>
-                        </div>
-                    </a>
-                </li>
-                <li class="playerList__item">
-                    <a href="/team/2023/21_warner_hahn">
-                        <div class="playerList__item__boxNum">
-                        <span class="number">31</span>
-                        <span class="position">GK</span>
-                        </div>
-                        <div class="playerList__item__boxImg">
-                        <img src="C:\Users\Bell\Downloads\Shutterstock_580100869.jpg">
-                        </div>
-                        <div class="playerList__item__boxNames">
-                        <p class="boxNameJp">西宮 真南人</p>
-                        <p class="boxNameEn">Manato Nishimiya</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="playerList__item">
-                    <a href="/team/2023/26_ota_gakuji">
-                        <div class="playerList__item__boxNum">
-                        <span class="number">26</span>
-                        <span class="position">GK</span>
-                        </div>
-                        <div class="playerList__item__boxImg">
-                        <img src="C:\Users\Bell\Downloads\Shutterstock_580100869.jpg">
-                        </div>
-                        <div class="playerList__item__boxNames">
-                        <p class="boxNameJp">濱田 恵助</p>
-                        <p class="boxNameEn">Keisuke Hamada</p>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-            <h3 >DF</h3>
-            <ul class="playerList">
-                <li class="playerList__item">
-                    <a href="/team/2023/01_wakahara_tomoya">
-                        <div class="playerList__item__boxNum">
-                        <span class="number">3</span>
-                        <span class="position">DF</span>
-                        </div>
-                        <div class="playerList__item__boxImg">
-                        <img  src="C:\Users\Bell\Downloads\Shutterstock_606491741.jpg" alt = "">
-                        </div>
-                        <div class="playerList__item__boxNames">
-                        <p class="boxNameJp">澤田 崇文</p>
-                        <p class="boxNameEn">Takafumi Sawada</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="playerList__item">
-                    <a href="/team/2023/21_warner_hahn">
-                        <div class="playerList__item__boxNum">
-                        <span class="number">7</span>
-                        <span class="position">DF</span>
-                        </div>
-                        <div class="playerList__item__boxImg">
-                        <img src="C:\Users\Bell\Downloads\Shutterstock_606491741.jpg">
-                        </div>
-                        <div class="playerList__item__boxNames">
-                        <p class="boxNameJp">道下 紘平</p>
-                        <p class="boxNameEn">Kouhei Mitishita</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="playerList__item">
-                    <a href="/team/2023/26_ota_gakuji">
-                        <div class="playerList__item__boxNum">
-                        <span class="number">17</span>
-                        <span class="position">DF</span>
-                        </div>
-                        <div class="playerList__item__boxImg">
-                        <img src="C:\Users\Bell\Downloads\Shutterstock_606491741.jpg">
-                        </div>
-                        <div class="playerList__item__boxNames">
-                        <p class="boxNameJp">森 貴之</p>
-                        <p class="boxNameEn">Takayuki Mori</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="playerList__item">
-                    <a href="/team/2023/01_wakahara_tomoya">
-                        <div class="playerList__item__boxNum">
-                        <span class="number">37</span>
-                        <span class="position">DF</span>
-                        </div>
-                        <div class="playerList__item__boxImg">
-                        <img  src="C:\Users\Bell\Downloads\Shutterstock_606491741.jpg" alt = "">
-                        </div>
-                        <div class="playerList__item__boxNames">
-                        <p class="boxNameJp">太田 祐資</p>
-                        <p class="boxNameEn">Yuzi Ota</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="playerList__item">
-                    <a href="/team/2023/21_warner_hahn">
-                        <div class="playerList__item__boxNum">
-                        <span class="number">70</span>
-                        <span class="position">DF</span>
-                        </div>
-                        <div class="playerList__item__boxImg">
-                        <img src="C:\Users\Bell\Downloads\Shutterstock_606491741.jpg">
-                        </div>
-                        <div class="playerList__item__boxNames">
-                        <p class="boxNameJp">森田 将太</p>
-                        <p class="boxNameEn">Shota Morita</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="playerList__item">
-                    <a href="/team/2023/26_ota_gakuji">
-                        <div class="playerList__item__boxNum">
-                        <span class="number">96</span>
-                        <span class="position">DF</span>
-                        </div>
-                        <div class="playerList__item__boxImg">
-                        <img src="C:\Users\Bell\Downloads\Shutterstock_606491741.jpg">
-                        </div>
-                        <div class="playerList__item__boxNames">
-                        <p class="boxNameJp">坂本 千太郎</p>
-                        <p class="boxNameEn">Sentaro Sakamoto</p>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-            <h3>MF</h3>
-            <ul class="playerList">
-                <li class="playerList__item">
-                    <a href="/team/2023/01_wakahara_tomoya">
-                        <div class="playerList__item__boxNum">
-                        <span class="number">4</span>
-                        <span class="position">MF</span>
-                        </div>
-                        <div class="playerList__item__boxImg">
-                        <img  src="C:\Users\Bell\Downloads\Shutterstock_1075084739.jpg" alt = "">
-                        </div>
-                        <div class="playerList__item__boxNames">
-                        <p class="boxNameJp">端野 健</p>
-                        <p class="boxNameEn">Ken Hashino</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="playerList__item">
-                    <a href="/team/2023/21_warner_hahn">
-                        <div class="playerList__item__boxNum">
-                        <span class="number">6</span>
-                        <span class="position">MF</span>
-                        </div>
-                        <div class="playerList__item__boxImg">
-                        <img src="C:\Users\Bell\Downloads\Shutterstock_1075084739.jpg">
-                        </div>
-                        <div class="playerList__item__boxNames">
-                        <p class="boxNameJp">板谷 大輝</p>
-                        <p class="boxNameEn">Daiki Itatani</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="playerList__item">
-                    <a href="/team/2023/26_ota_gakuji">
-                        <div class="playerList__item__boxNum">
-                        <span class="number">13</span>
-                        <span class="position">MF</span>
-                        </div>
-                        <div class="playerList__item__boxImg">
-                        <img src="C:\Users\Bell\Downloads\Shutterstock_1075084739.jpg">
-                        </div>
-                        <div class="playerList__item__boxNames">
-                        <p class="boxNameJp">大西 草太</p>
-                        <p class="boxNameEn">Sota Onishi</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="playerList__item">
-                    <a href="/team/2023/01_wakahara_tomoya">
-                        <div class="playerList__item__boxNum">
-                        <span class="number">14</span>
-                        <span class="position">MF</span>
-                        </div>
-                        <div class="playerList__item__boxImg">
-                        <img  src="C:\Users\Bell\Downloads\Shutterstock_1075084739.jpg" alt = "">
-                        </div>
-                        <div class="playerList__item__boxNames">
-                        <p class="boxNameJp">松本 雄太</p>
-                        <p class="boxNameEn">Yuta Matsumoto</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="playerList__item">
-                    <a href="/team/2023/21_warner_hahn">
-                        <div class="playerList__item__boxNum">
-                        <span class="number">15</span>
-                        <span class="position">MF</span>
-                        </div>
-                        <div class="playerList__item__boxImg">
-                        <img src="C:\Users\Bell\Downloads\Shutterstock_1075084739.jpg">
-                        </div>
-                        <div class="playerList__item__boxNames">
-                        <p class="boxNameJp">今井 蒼空</p>
-                        <p class="boxNameEn">Sora Imai</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="playerList__item">
-                    <a href="/team/2023/26_ota_gakuji">
-                        <div class="playerList__item__boxNum">
-                        <span class="number">33</span>
-                        <span class="position">MF</span>
-                        </div>
-                        <div class="playerList__item__boxImg">
-                        <img src="C:\Users\Bell\Downloads\Shutterstock_1075084739.jpg">
-                        </div>
-                        <div class="playerList__item__boxNames">
-                        <p class="boxNameJp">石島 和真</p>
-                        <p class="boxNameEn">Kazuma Isizima</p>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-            <h3>FW</h3>
-            <ul class="playerList">
-                <li class="playerList__item">
-                    <a href="/team/2023/01_wakahara_tomoya">
-                        <div class="playerList__item__boxNum">
-                        <span class="number">5</span>
-                        <span class="position">FW</span>
-                        </div>
-                        <div class="playerList__item__boxImg">
-                        <img  src="C:\Users\Bell\Downloads\Shutterstock_606491411.jpg" alt = "">
-                        </div>
-                        <div class="playerList__item__boxNames">
-                        <p class="boxNameJp">辻 徹也</p>
-                        <p class="boxNameEn">Tetsuya Tsuzi</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="playerList__item">
-                    <a href="/team/2023/21_warner_hahn">
-                        <div class="playerList__item__boxNum">
-                        <span class="number">10</span>
-                        <span class="position">FW</span>
-                        </div>
-                        <div class="playerList__item__boxImg">
-                        <img src="C:\Users\Bell\Downloads\Shutterstock_606491411.jpg">
-                        </div>
-                        <div class="playerList__item__boxNames">
-                        <p class="boxNameJp">中本 淳一郎</p>
-                        <p class="boxNameEn">Junitiro Nakamoto</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="playerList__item">
-                    <a href="/team/2023/26_ota_gakuji">
-                        <div class="playerList__item__boxNum">
-                        <span class="number">11</span>
-                        <span class="position">FW</span>
-                        </div>
-                        <div class="playerList__item__boxImg">
-                        <img src="C:\Users\Bell\Downloads\Shutterstock_606491411.jpg">
-                        </div>
-                        <div class="playerList__item__boxNames">
-                        <p class="boxNameJp">畑山 一都</p>
-                        <p class="boxNameEn">Kazuto Hatayama</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="playerList__item">
-                    <a href="/team/2023/01_wakahara_tomoya">
-                        <div class="playerList__item__boxNum">
-                        <span class="number">20</span>
-                        <span class="position">FW</span>
-                        </div>
-                        <div class="playerList__item__boxImg">
-                        <img  src="C:\Users\Bell\Downloads\Shutterstock_606491411.jpg" alt = "">
-                        </div>
-                        <div class="playerList__item__boxNames">
-                        <p class="boxNameJp">堀場 弾</p>
-                        <p class="boxNameEn">Dan Horiba</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="playerList__item">
-                    <a href="/team/2023/21_warner_hahn">
-                        <div class="playerList__item__boxNum">
-                        <span class="number">32</span>
-                        <span class="position">FW</span>
-                        </div>
-                        <div class="playerList__item__boxImg">
-                        <img src="C:\Users\Bell\Downloads\Shutterstock_606491411.jpg">
-                        </div>
-                        <div class="playerList__item__boxNames">
-                        <p class="boxNameJp">米澤 雅也</p>
-                        <p class="boxNameEn">Masaya Yonezawa</p>
-                        </div>
-                    </a>
-                </li>
+            <!-- FWデータの書き出し -->
+            <?php foreach($fws as $fw): ?>
+              <li class='playerList__item'>
+                <a href='#'>
+                  <div class='playerList__item__boxNum'>
+                    <span class='number'><?php echo $fw["member_num"]; ?></span>
+                    <span class='position'>FW</span>
+                  </div>
+                  <div class='playerList__item__boxImg'>
+                    <img src='img/soccer.fw.jpg'>
+                  </div>
+                  <div class='playerList__item__boxNames'>
+                    <p class ='boxNameJP'><?php echo $fw["member_name"]; ?></p>
+                    <p class='boxNameEn'><?php echo $fw["member_roma_name"]; ?></p>
+                  </div>
+                </a>
+              </li>
+            <?php endforeach; ?>
             </ul>
           </div>
         </div>
       </div>
-    <footer>
+      <footer>
         <div class="container">
           <div class="footer-left">
             <h2>FC.ESPERTOオフィシャルサイト<br><span>play for ESPERTO, since 1999</span></h2>
           </div>
-        </div>
+      </div>
       </footer>
   
-    </body>
-  </html>
+      <!-- メニューアイコン -->
+    <script src="script.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+var menuIcon = document.getElementById("menuIcon");
+var sidenav = document.getElementById("sidenav");
+var closeBtn = document.getElementById("closeBtn");
+
+menuIcon.addEventListener("click", function() {
+    sidenav.style.width = "250px";
+});
+
+closeBtn.addEventListener("click", function() {
+    sidenav.style.width = "0";
+});
+
+// Close the sidenav if the user clicks outside of it
+window.addEventListener("click", function(event) {
+    if (!event.target.matches('#menuIcon') && !event.target.closest('.sidenav')) {
+        sidenav.style.width = "0";
+    }
+});
+});
+
+</script>
+
+  </body>
+</html>
