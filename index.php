@@ -6,11 +6,18 @@
 // ファイルを読み込む（相対パスで読み込む）
 // require_once 'settings\config.php';
 
-// データベース接続情報
+// データベース接続情報(localhost)
 define('DB_HOST', 'localhost'); // データベースのホスト名
 define('DB_USER', 'root'); // データベースのユーザー名
 define('DB_PASS', ''); // データベースのパスワード
 define('DB_NAME', 'esperto'); // データベース名
+
+// データベース接続情報
+// define('DB_HOST', 'mysql643.db.sakura.ne.jp'); // データベースのホスト名
+// define('DB_USER', 'esperto'); // データベースのユーザー名
+// define('DB_PASS', 'bell1100'); // データベースのパスワード
+// define('DB_NAME', 'esperto_db'); // データベース名
+
 
 
 // リンクのリストをPHPで定義
@@ -60,12 +67,11 @@ for($i=0; $i<count($inf); $i++) {
     <meta name="robots" content="noindex">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FC.ESPERTOオフィシャル</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/stylesheet (1).css">
-    <!-- <link rel="stylesheet" href="stylesheet.css">
-    <link rel="stylesheet" href="swiper.min.css"> -->
-    <link rel="stylesheet" type="text/css" href="s.css">
-    <link rel="stylesheet" type="text/css" href="a.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="css/responsive-styles.css">
+
 
     <!-- <script>
         function getDynamicLink() {
@@ -175,7 +181,6 @@ for($i=0; $i<count($inf); $i++) {
                     </span>
                     <span class="teams-name"><?php echo $result["team_name"]; ?></span>
                   </div>
-                  <!-- <div class="match-info"><?php echo $result["place"]; ?></div> -->
                 </div>
               </article>
             </a>
@@ -195,19 +200,20 @@ for($i=0; $i<count($inf); $i++) {
           <p>お知らせ</p>
         </div>
         <!-- ニュースセクション -->
-        <!-- <div id="news" class=" active "> -->
         <ul class="news">
           <?php foreach($news as $new): ?>
           <li>
             <a href="http://localhost/news.php?news_id=<?php echo $new["news_id"]; ?>">
+            <a href="http://esperto.sakura.ne.jp/news.php?news_id=<?php echo $new["news_id"]; ?>">
               <dl>
                 <dd>
                   <p class="news-dates">
                     <?php echo $new["news_date"]; ?>
                     <span><?php echo $new["categories"]; ?></span>
                   </p>
-                  <p class="title"><?php echo $new["titles"]; ?></p>
-                  <!-- <i class="fa-solid fa-chevron-right"></i> -->
+                  <p class="title"><?php echo $new["titles"]; ?>
+                  <i class="fa-solid fa-chevron-right"></i>
+                  </p>
                 </dd>
               </dl>
             </a>

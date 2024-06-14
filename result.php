@@ -6,11 +6,17 @@
 // ファイルを読み込む（相対パスで読み込む）
 // require_once 'settings\config.php';
 
-// データベース接続情報
+// データベース接続情報(localhost)
 define('DB_HOST', 'localhost'); // データベースのホスト名
 define('DB_USER', 'root'); // データベースのユーザー名
 define('DB_PASS', ''); // データベースのパスワード
 define('DB_NAME', 'esperto'); // データベース名
+
+// データベース接続情報
+define('DB_HOST', 'mysql643.db.sakura.ne.jp'); // データベースのホスト名
+define('DB_USER', 'esperto'); // データベースのユーザー名
+define('DB_PASS', 'bell1100'); // データベースのパスワード
+define('DB_NAME', 'esperto_db'); // データベース名
 
 //クエリパラメータ（season）を取得
 if(isset($_GET["season"])){
@@ -64,9 +70,11 @@ for($i=0; $i<count($rel); $i++) {
 <html lang="ja">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FC.ESPERTOオフィシャル</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/stylesheet (1).css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="css/responsive-styles.css">
     <script>
         function getDynamicLink() {
             // PHPで生成されたリンクリストをJavaScript配列として取得
@@ -115,7 +123,6 @@ for($i=0; $i<count($rel); $i++) {
           </ul>
         </div>
       </div>
-      <!-- <span class= "menu-icon fa fa-bars"></span> -->
       <div class="header-right">
         <ul class="menu-lists">
           <li class="menu-list"><a href="#">TEAM</a>
@@ -175,6 +182,7 @@ for($i=0; $i<count($rel); $i++) {
               <span class='half-score'><?php echo $result["home_half"]; ?>-<?php echo $result["away_half"]; ?></span>
               <span class="half-score"><?php echo $result["home_goals"]; ?>-<?php echo $result["away_goals"]; ?></span>
               <a href="http://localhost/detail.php?result_id=<?php echo $result["result_id"]; ?>" class="match-detail">試合データ</a>
+              <a href="http://esperto.sakura.ne.jp/detail.php?result_id=<?php echo $result["result_id"]; ?>" class="match-detail">試合データ</a>
             </div>
           <?php endforeach ; ?>
         </div>
@@ -195,6 +203,7 @@ for($i=0; $i<count($rel); $i++) {
           let selectedValue = selectElement.value;
           //画面を再読み込み
           window.location.href = "http://localhost/result.php?season=" + selectedValue;
+          window.location.href = "http://esperto.sakura.ne.jp/result.php?season=" + selectedValue;
           });
     </script>
     <!-- メニューアイコン -->

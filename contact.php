@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FC.ESPERTOオフィシャル</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/stylesheet (1).css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="css/responsive-styles.css">
   </head>
   <body>
       <header>
@@ -110,13 +111,6 @@
             <textarea name="body" required></textarea>
             <p><input type="submit" value="送信" class="btn submit"></p>
           </form>
-          <!-- <p>お名前（必須）</p>
-          <input>
-          <p>メールアドレス（必須）</p>
-          <input>
-          <p>お問い合わせ内容</p>
-          <textarea></textarea>
-          <p><a href="#" class="btn submit">送信</a></p> -->
         </div>
       </div>
       <footer>

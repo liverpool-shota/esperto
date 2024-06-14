@@ -6,11 +6,17 @@
 // ファイルを読み込む（相対パスで読み込む）
 // require_once 'settings\config.php';
 
-// データベース接続情報
+// データベース接続情報(localhost)
 $servername = "localhost";  // データベースサーバーのホスト名
 $username = "root";         // MySQLのユーザー名
 $password = "";             // MySQLのパスワード
 $dbname = "esperto"; // 使用するデータベース名
+
+// データベース接続情報
+define('DB_HOST', 'mysql643.db.sakura.ne.jp'); // データベースのホスト名
+define('DB_USER', 'esperto'); // データベースのユーザー名
+define('DB_PASS', 'bell1100'); // データベースのパスワード
+define('DB_NAME', 'esperto_db'); // データベース名
 
 // フォームから送信されたデータを取得
 $name = $_POST['name'];
@@ -51,7 +57,8 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FC.ESPERTOオフィシャル</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/stylesheet (1).css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="css/responsive-styles.css">
   </head>
   <body>
       <header>
@@ -90,7 +97,6 @@ $conn->close();
           </ul>
         </div>
       </div>
-      <!-- <span class= "menu-icon fa fa-bars"></span> -->
       <div class="header-right">
         <ul class="menu-lists">
           <li class="menu-list"><a href="#">TEAM</a>
@@ -140,13 +146,6 @@ $conn->close();
             <div class="form-item">■内容</div>
             <?php echo $_POST['body']; ?>
           </div>
-          <!-- <p>お名前（必須）</p>
-          <input>
-          <p>メールアドレス（必須）</p>
-          <input>
-          <p>お問い合わせ内容</p>
-          <textarea></textarea>
-          <p><a href="#" class="btn submit">送信</a></p> -->
         </div>
     </div>
       <footer>

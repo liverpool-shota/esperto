@@ -1,0 +1,143 @@
+@media (max-width: 1800px) {
+  .header-right {
+      display: none;
+  }
+  .menu-icon {
+      display: block !important;
+  }
+}
+
+/* media query for smartphone screens */
+@media (max-width: 768px) {
+  .header-left {
+      font-size: 20px;
+      margin-left: 20px;
+  }
+
+  .header-right {
+      display: none;
+  }
+
+  .menu-icon {
+      display: block;
+      padding: 20px 20px;
+      font-size: 20px;
+  }
+
+  .top-wrapper h1 {
+      font-size: 32px;
+  }
+
+  .footer-left h2 {
+    font-size: 22px;
+  }
+  .home-wrapper h1 {
+      font-size: 24px;
+  }
+
+  .home-wrapper p {
+      font-size: 16px;
+  }
+
+  .container {
+      padding: 0 20px;
+  }
+
+  .sidenav a {
+      font-size: 20px;
+  }
+
+  .sidenav .closebtn {
+      font-size: 30px;
+  }
+
+  input, textarea {
+      width: 90%;
+      font-size: 16px;
+  }
+
+  .submit {
+      padding: 12px 30px;
+      font-size: 16px;
+  }
+
+  .form-title {
+      font-size: 24px;
+  }
+
+  .form-item {
+      font-size: 16px;
+  }
+
+  .display-contact {
+      width: 90%;
+      padding: 30px;
+  }
+
+  .news-title {
+    font-size: 22px;
+  }
+
+  .news-date {
+    font-size: 20px;
+  }
+
+  .contents {
+    font-size: 20px;
+  }
+
+  .number {
+    font-size: 20px;
+  }
+  .position {
+    font-size: 18px;
+  }
+
+  th,td {
+    font-size: 18px;
+  }
+
+  .txt-content {
+    font-size: 20px;
+  }
+  .title {
+      font-size: 20px;
+  }
+
+  .heading h2 {
+    font-size: 24px;
+  }
+
+  .heading h3 {
+      font-size: 20px; 
+  }
+
+  .match-title {
+      font-size: 22px; 
+  }
+
+  .date {
+    font-size: 20px;
+  }
+
+  .place {
+    font-size: 20px;
+  }
+  .team-name {
+    font-size: 20px;
+  }
+
+  .match-detail {
+    font-size: 20px;
+  }
+
+  .detail-wrapper p {
+      font-size: 18px; 
+  }
+
+  .photos img {
+      flex: 1 1 calc(50% - 20px); /* スマホでは1行に2つの画像が表示されるように設定 */
+      max-width: calc(50% - 20px); /* 親要素の幅に対して各画像の最大幅を設定（余白を考慮） */
+  }
+
+}

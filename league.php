@@ -6,11 +6,18 @@
 // ファイルを読み込む（相対パスで読み込む）
 // require_once 'settings\config.php';
 
-// データベース接続情報
+// データベース接続情報(localhost)
 define('DB_HOST', 'localhost'); // データベースのホスト名
 define('DB_USER', 'root'); // データベースのユーザー名
 define('DB_PASS', ''); // データベースのパスワード
 define('DB_NAME', 'esperto'); // データベース名
+
+
+// データベース接続情報
+define('DB_HOST', 'mysql643.db.sakura.ne.jp'); // データベースのホスト名
+define('DB_USER', 'esperto'); // データベースのユーザー名
+define('DB_PASS', 'bell1100'); // データベースのパスワード
+define('DB_NAME', 'esperto_db'); // データベース名
 
 //クエリパラメータ（season）を取得
 if(isset($_GET["season"])){
@@ -53,9 +60,12 @@ for($i=0; $i<count($row); $i++) {
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>League-table</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/stylesheet (1).css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="css/responsive-styles.css">
+
   </head>
   <body>
     <header>
@@ -126,7 +136,7 @@ for($i=0; $i<count($row); $i++) {
       <div class="league_table-wrapper">
         <div class="container">
           <div class="heading">
-            <h1>第58回京都フットボールリーグ<?php echo $year ?><br>DIVISON 2</h1>
+            <h2>第58回京都フットボールリーグ<?php echo $year ?><br>DIVISON 2</h2>
             <p>順位表</p>
             <select id="season">
               <option value="未選択">選択してください</option>
@@ -218,6 +228,7 @@ for($i=0; $i<count($row); $i++) {
           let selectedValue = selectElement.value;
           //画面を再読み込み
           window.location.href = "http://localhost/league.php?season=" + selectedValue;
+          window.location.href = "http://esperto.sakura.ne.jp/league.php?season=" + selectedValue;
           });
         </script>
         <!-- メニューアイコン -->
