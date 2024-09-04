@@ -7,10 +7,10 @@
 // require_once 'settings\config.php';
 
 // データベース接続情報(localhost)
-define('DB_HOST', 'localhost'); // データベースのホスト名
-define('DB_USER', 'root'); // データベースのユーザー名
-define('DB_PASS', ''); // データベースのパスワード
-define('DB_NAME', 'esperto'); // データベース名
+// define('DB_HOST', 'localhost'); // データベースのホスト名
+// define('DB_USER', 'root'); // データベースのユーザー名
+// define('DB_PASS', ''); // データベースのパスワード
+// define('DB_NAME', 'esperto'); // データベース名
 
 // データベース接続情報
 define('DB_HOST', 'mysql643.db.sakura.ne.jp'); // データベースのホスト名
@@ -76,7 +76,32 @@ for($i=0; $i<count($row); $i++) {
       <div class="header-center">
         <img class="logo" src="img/esp.logo.png">
       </div>
-
+      <!-- メニューアイコン -->
+      <div class="menu-icon" id="menuIcon">&#9776;</div>
+        <div class="sidenav" id="sidenav">
+          <a href="javascript:void(0)" class="closebtn" id="closeBtn">&times;</a>
+          <ul class="options-lists">
+            <li class="option-list"><a href="#">TEAM</a>
+              <ul class="under-lists">
+                <li class="under-list"><a href="club.html">クラブ概要</a></li>
+                <li class="under-list"><a href="member.php">メンバー</a></li>
+              </ul>
+            </li>
+            <li class="option-list"><a href="#">MATCHES</a>
+              <ul class="under-lists">
+                <li class="under-list"><a href="match.php">試合情報</a></li>
+                <li class="under-list"><a href="result.php">試合結果</a></li>
+                <li class="under-list"><a href="league.php">順位表</a></li>
+              </ul>
+            </li>
+            <li class="option-list"><a href="contact.php">CONTACT US</a></li>
+            <li class="option-list">
+              <a href="https://www.instagram.com/f.c__esperto?utm_source=ig_web_button_share_sheet&igsh=MmVlMjlkMTBhMg==" class="instagram">
+                <span class="fa fa-instagram"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
       <div class="header-right">
         <ul class="menu-lists">
           <li class="menu-list"><a href="#">TEAM</a>
@@ -155,7 +180,7 @@ for($i=0; $i<count($row); $i++) {
           // select要素で選択中のoptionの値を取得
           let selectedValue = selectElement.value;
           //画面を再読み込み
-          window.location.href = "http://localhost/match.php?season=" + selectedValue;
+          // window.location.href = "http://localhost/match.php?season=" + selectedValue;
           window.location.href = "http://esperto.sakura.ne.jp/match.php?season=" + selectedValue;
           });
     </script>
@@ -163,27 +188,27 @@ for($i=0; $i<count($row); $i++) {
     <script src="script.js"></script>
 
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-    var menuIcon = document.getElementById("menuIcon");
-    var sidenav = document.getElementById("sidenav");
-    var closeBtn = document.getElementById("closeBtn");
+      document.addEventListener("DOMContentLoaded", function() {
+          var menuIcon = document.getElementById("menuIcon");
+          var sidenav = document.getElementById("sidenav");
+          var closeBtn = document.getElementById("closeBtn");
 
-    menuIcon.addEventListener("click", function() {
-        sidenav.style.width = "250px";
-    });
+          menuIcon.addEventListener("click", function() {
+              sidenav.style.width = "250px";
+          });
 
-    closeBtn.addEventListener("click", function() {
-        sidenav.style.width = "0";
-    });
+          closeBtn.addEventListener("click", function() {
+              sidenav.style.width = "0";
+          });
 
-    // Close the sidenav if the user clicks outside of it
-    window.addEventListener("click", function(event) {
-        if (!event.target.matches('#menuIcon') && !event.target.closest('.sidenav')) {
-            sidenav.style.width = "0";
-        }
-    });
-});
+          // Close the sidenav if the user clicks outside of it
+          window.addEventListener("click", function(event) {
+              if (!event.target.matches('#menuIcon') && !event.target.closest('.sidenav')) {
+                  sidenav.style.width = "0";
+              }
+          });
+      });
+  </script>
 
-    </script>
     </body>
   </html>

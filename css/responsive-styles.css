@@ -1,27 +1,77 @@
-@media (max-width: 1800px) {
+@media (max-width: 1300px) {
   .header-right {
       display: none;
   }
   .menu-icon {
       display: block !important;
+      font-size: 30px;
+      padding: 20px 90px;
   }
 }
 
+
 /* media query for smartphone screens */
 @media (max-width: 768px) {
-  .header-left {
-      font-size: 20px;
-      margin-left: 20px;
+  .header {
+    justify-content: space-between; /* 均等配置 */
+    padding: 0 10px; /* 左右のパディング調整 */
+}
+
+.header-left, .header-center, .menu-icon {
+    width: 33%; /* 各要素の幅を均等に設定 */
+}
+
+.header-left {
+    font-size: 20px;
+    margin-left: 10px; /* スマホサイズでは左マージンをゼロに */
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+ .header-center {
+    padding-left: 50px;
+ } 
+
+.logo {
+    height: 60px !important; /* スマートフォンサイズに合わせてロゴの高さを調整 */
+    margin-left: auto;
+    
+}
+
+.header-right {
+    display: none; /* スマホサイズでは非表示 */
+}
+
+.menu-icon {
+    display: block; /* スマホサイズで表示 */
+    font-size: 20px;
+    text-align: right; /* アイコンを右揃え */
+}
+
+.sidenav {
+    padding-top: 30px; /* サイドナビのパディングを調整 */
+}
+
+  
+  #top-img {
+    height: auto;
+    max-height: 50vh; /* Adjust as needed */
   }
 
-  .header-right {
-      display: none;
+  .home-wrapper {
+    height: auto;
   }
 
-  .menu-icon {
-      display: block;
-      padding: 20px 20px;
-      font-size: 20px;
+  .home-wrapper h1 {
+    font-size: 8vw; 
+  }
+
+  .home-wrapper p {
+    font-size: 4vw; 
+  }
+
+  .match-wrapper {
+    padding: 40px 0; 
   }
 
   .top-wrapper h1 {
@@ -29,26 +79,19 @@
   }
 
   .footer-left h2 {
-    font-size: 22px;
+    font-size: 18px;
   }
-  .home-wrapper h1 {
-      font-size: 24px;
-  }
-
-  .home-wrapper p {
-      font-size: 16px;
-  }
-
+  
   .container {
       padding: 0 20px;
   }
 
   .sidenav a {
-      font-size: 20px;
+      font-size: 16px;
   }
 
   .sidenav .closebtn {
-      font-size: 30px;
+      font-size: 20px;
   }
 
   input, textarea {
@@ -75,15 +118,15 @@
   }
 
   .news-title {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .news-date {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .contents {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .number {
@@ -94,14 +137,17 @@
   }
 
   th,td {
-    font-size: 18px;
+    font-size: 14px;
   }
 
   .txt-content {
-    font-size: 20px;
+    font-size: 18px;
   }
   .title {
-      font-size: 20px;
+      font-size: 16px;
+  }
+  .news-dates {
+    font-size: 16px;
   }
 
   .heading h2 {
@@ -109,22 +155,22 @@
   }
 
   .heading h3 {
-      font-size: 20px; 
+      font-size: 18px; 
   }
 
   .match-title {
-      font-size: 22px; 
+      font-size: 20px; 
   }
 
   .date {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .place {
-    font-size: 20px;
+    font-size: 18px;
   }
   .team-name {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .match-detail {
@@ -140,4 +186,48 @@
       max-width: calc(50% - 20px); /* 親要素の幅に対して各画像の最大幅を設定（余白を考慮） */
   }
 
+  .boxNameJP {
+    font-size: 10px;
+  }
+
+  .boxNameEn {
+    font-size: 10px;
+  }
+
+  .match-titles{
+    font-size: 18px;
+  }
+  .match-date{
+    font-size: 16px;
+  }
+  .teams-name{
+    font-size: 16px;
+  }
+  .score {
+    font-size: 18px;
+  }
+
+  .swiper-slide {
+    width: 100%; /* モバイル表示での幅調整 */
+}
+
+.detail-wrapper {
+    flex: 1;
+    overflow: auto; /* 必要に応じて調整 */
+}
+
+.footer {
+    margin-top: auto;
+}
+}
+
+/* スマートフォン用の調整 */
+@media screen and (max-width: 768px) {
+  .l-section {
+    padding-top: 4rem; /* スマートフォン用の上部パディング調整 */
+  }
+  
+  .txt-content {
+    padding: 8px; /* スマートフォン用のテキストコンテンツのパディング調整 */
+  }
 }

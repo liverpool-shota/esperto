@@ -144,120 +144,121 @@ function filterByPosition($members, $position) {
         </div>
     </div>
     <div class="match-wrapper">
-  <div class="container">
-    <div class="heading">
-      <h2>試合データ</h2>
+      <div class="container">
+        <div class="heading">
+          <h2>試合データ</h2>
+        </div>
+        <section id="demo01" class="card01 l-section">
+          <div class="swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden matches">
+            <div class="swiper-wrapper" id="swiper-wrapper-9cf1b6c69d4710530" aria-live="polite" style="cursor: grab; transform: translate3d(0px, 0px, 0px);"> 
+              <?php foreach($results as $result_id => $result): ?>
+              <div  class="swiper-slide" role="group" aria-label="Slide" data-swiper-slide-index="<?php echo $result_id; ?>" style="width: 279px; margin-right: 32px;">
+                <article class="slide">
+                  <div class="slide-media img-cover">
+                    <img src="img/IMG_3871.JPG" alt="Slide Image">
+                  </div>
+                  <div class="slide-content">
+                    <div class="match-title"><?php echo $result['result']['match_category']; ?></div>
+                    <div class="date"><?php echo $result['result']["match_date"]; ?>  KICK OFF </div>
+                    <p class="place"><?php echo $result['result']['place']; ?></p>
+                    <div class="match-table">
+                      <span class="team-name">FC.ESPERTO</span>
+                      <span class="score">
+                        <?php echo $result['result']["home_half"] + $result['result']["home_goals"]; ?> - 
+                        <?php echo $result['result']["away_half"] + $result['result']["away_goals"]; ?>
+                      </span>
+                      <span class="team-name"><?php echo $result['result']["team_name"]; ?></span>
+                      <span class="half-score"><?php echo $result['result']['home_half']; ?>-
+                      <?php echo $result['result']['away_half']; ?></span>
+                      <span class="half-score"><?php echo $result['result']["home_goals"]; ?>-
+                      <?php echo $result['result']["away_goals"]; ?></span>
+                      <p class="scorer">
+                        <!-- 得点者を表示 -->
+                        <?php if (!empty($result['scorers'])): ?>
+                        <ul>
+                          <?php foreach ($result['scorers'] as $scorer): ?>
+                          <li><?php echo $scorer['member_name']; ?> × <?php echo $scorer['scores']; ?></li>
+                          <?php endforeach; ?>
+                          <?php else: ?>
+                            得点者なし
+                        </ul>
+                          <?php endif; ?>
+                      </p>
+                    </div>
+                    <div class="detail-wrapper">
+                      <!-- <div class="container"> -->
+                        <h5>試合データ</h5>
+                        <p>先発メンバー</p>
+                        <table>
+                          <tr>
+                            <th>ポジション</th>
+                            <th>背番号</th>
+                            <th>名前</th>
+                          </tr>
+                          <?php foreach(['GK', 'DF', 'MF', 'FW'] as $pos): ?>
+                          <?php foreach(filterByPosition($result['members'], $pos) as $member): ?>
+                          <?php if($member['starter'] == "1"): ?>
+                            <tr>
+                              <td class="position"><?php echo $pos; ?></td>
+                              <td><?php echo $member['member_num']; ?></td>
+                              <td><?php echo $member['member_name']; ?></td>
+                            </tr>
+                          <?php endif; ?>
+                          <?php endforeach; ?>
+                          <?php endforeach; ?>
+                        </table>
+                        <p>控えメンバー</p>
+                        <table>
+                          <tr>
+                            <th>ポジション</th>
+                            <th>背番号</th>
+                            <th>名前</th>
+                          </tr>
+                          <?php foreach(['GK', 'DF', 'MF', 'FW'] as $pos): ?>
+                          <?php foreach(filterByPosition($result['members'], $pos) as $member): ?>
+                          <?php if($member['starter'] == "0"): ?>
+                            <tr>
+                              <td class="position"><?php echo $pos; ?></td>
+                              <td><?php echo $member['member_num']; ?></td>
+                              <td><?php echo $member['member_name']; ?></td>
+                            </tr>
+                          <?php endif; ?>
+                          <?php endforeach; ?>
+                          <?php endforeach; ?>
+                        </table>
+                        <p>交代</p>
+                        <table>
+                          <tr>
+                            <th>IN</th>
+                            <th>OUT</th>
+                          </tr>
+                          <?php if (isset($result['ins']) && isset($result['outs'])): ?>
+                          <?php foreach ($result['ins'] as $index => $in_player): ?>
+                            <tr>
+                              <td><?php echo $in_player; ?></td>
+                              <td><?php echo isset($result['outs'][$index]) ? $result['outs'][$index] : ''; ?></td>
+                            </tr>
+                          <?php endforeach; ?>
+                          <?php endif; ?>
+                        </table>
+                        <!-- <div class="sammary"> -->
+                          <h6 class="sammary">試合総括
+                          <p class='txt-content'><?php echo $result['result']["summary"]; ?></p></h6>
+                        <!-- </div> -->
+                      <!-- </div> -->
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <?php endforeach; ?>
+            </div><!-- /swiper-wrapper -->
+            <div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-ee136ddec2d7545b"></div>
+            <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-ee136ddec2d7545b"></div>
+            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+          </div><!-- /swiper -->
+        </section>
+      </div>
     </div>
-    <section id="demo01" class="card01 l-section">
-      <div class="swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden matches">
-        <div class="swiper-wrapper" id="swiper-wrapper-9cf1b6c69d4710530" aria-live="polite" style="cursor: grab; transform: translate3d(0px, 0px, 0px);">
-          <?php foreach($results as $result_id => $result): ?>
-          <div class="swiper-slide" role="group" aria-label="Slide" data-swiper-slide-index="<?php echo $result_id; ?>" style="width: 279px; margin-right: 32px;">
-            <div class="slide">
-              <div class="slide-media img-cover">
-                <img src="img/IMG_3871.JPG" alt="Slide Image">
-              </div>
-              <div class="slide-content">
-                <div class="match-title"><?php echo $result['result']['match_category']; ?></div>
-                <div class="date"><?php echo $result['result']["match_date"]; ?> KICK OFF</div>
-                <p class="place"><?php echo $result['result']['place']; ?></p>
-                <div class="match-table">
-                  <span class="team-name">FC.ESPERTO</span>
-                  <span class="score">
-                    <?php echo $result['result']["home_half"] + $result['result']["home_goals"]; ?> - 
-                    <?php echo $result['result']["away_half"] + $result['result']["away_goals"]; ?>
-                  </span>
-                  <span class="team-name"><?php echo $result['result']["team_name"]; ?></span>
-                  <span class="half-score"><?php echo $result['result']['home_half']; ?>-
-                  <?php echo $result['result']['away_half']; ?></span>
-                  <span class="half-score"><?php echo $result['result']["home_goals"]; ?>-
-                  <?php echo $result['result']["away_goals"]; ?></span>
-                  <p class="scorer">
-                    <!-- 得点者を表示 -->
-                    <?php if (!empty($result['scorers'])): ?>
-                    <ul>
-                      <?php foreach ($result['scorers'] as $scorer): ?>
-                      <li><?php echo $scorer['member_name']; ?> × <?php echo $scorer['scores']; ?></li>
-                      <?php endforeach; ?>
-                      <?php else: ?>
-                        得点者なし
-                    </ul>
-                    <?php endif; ?>
-                  </p>
-                </div>
-                <div class="detail-wrapper">
-                  <h5>試合データ</h5>
-                  <p>先発メンバー</p>
-                  <table>
-                    <tr>
-                      <th>ポジション</th>
-                      <th>背番号</th>
-                      <th>名前</th>
-                    </tr>
-                    <?php foreach(['GK', 'DF', 'MF', 'FW'] as $pos): ?>
-                    <?php foreach(filterByPosition($result['members'], $pos) as $member): ?>
-                    <?php if($member['starter'] == "1"): ?>
-                      <tr>
-                        <td class="position"><?php echo $pos; ?></td>
-                        <td><?php echo $member['member_num']; ?></td>
-                        <td><?php echo $member['member_name']; ?></td>
-                      </tr>
-                    <?php endif; ?>
-                    <?php endforeach; ?>
-                    <?php endforeach; ?>
-                  </table>
-                  <p>控えメンバー</p>
-                  <table>
-                    <tr>
-                      <th>ポジション</th>
-                      <th>背番号</th>
-                      <th>名前</th>
-                    </tr>
-                    <?php foreach(['GK', 'DF', 'MF', 'FW'] as $pos): ?>
-                    <?php foreach(filterByPosition($result['members'], $pos) as $member): ?>
-                    <?php if($member['starter'] == "0"): ?>
-                      <tr>
-                        <td class="position"><?php echo $pos; ?></td>
-                        <td><?php echo $member['member_num']; ?></td>
-                        <td><?php echo $member['member_name']; ?></td>
-                      </tr>
-                    <?php endif; ?>
-                    <?php endforeach; ?>
-                    <?php endforeach; ?>
-                  </table>
-                  <p>交代</p>
-                  <table>
-                    <tr>
-                      <th>IN</th>
-                      <th>OUT</th>
-                    </tr>
-                    <?php if (isset($result['ins']) && isset($result['outs'])): ?>
-                    <?php foreach ($result['ins'] as $index => $in_player): ?>
-                      <tr>
-                        <td><?php echo $in_player; ?></td>
-                        <td><?php echo isset($result['outs'][$index]) ? $result['outs'][$index] : ''; ?></td>
-                      </tr>
-                    <?php endforeach; ?>
-                    <?php endif; ?>
-                  </table>
-                  <h6 class="summary">試合総括</h6>
-                  <p class='txt-content'><?php echo $result['result']["summary"]; ?></p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <?php endforeach; ?>
-        </div><!-- /swiper-wrapper -->
-        <div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-ee136ddec2d7545b"></div>
-        <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-ee136ddec2d7545b"></div>
-        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-      </div><!-- /swiper -->
-    </section>
-  </div>
-</div>
-
-
-
     <footer>
         <div class="container">
           <div class="footer-left">
@@ -265,6 +266,17 @@ function filterByPosition($members, $position) {
           </div>
         </div>
     </footer>
+     <script>
+         document.getElementById("result_id").addEventListener("change", function() {
+          // select要素を取得
+          let selectElement = document.getElementById("result_id");
+          // select要素で選択中のoptionの値を取得
+          let selectedValue = selectElement.value;
+          //画面を再読み込み
+          // window.location.href = "http://localhost/detail.php?result_id=" + selectedValue;
+          window.location.href = "http://esperto.sakura.ne.jp/detail.php?result_id=" + selectedValue;
+          });
+     </script> 
      <!-- メニューアイコン -->
     <script src="script.js"></script>
 
@@ -311,73 +323,6 @@ function filterByPosition($members, $position) {
         });
     }());
 </script>
-
-
-<script>
-$(document).ready(function() {
-  function adjustWrapperHeight() {
-    var windowHeight = $(window).height();
-    var footerHeight = $('footer').outerHeight();
-    var headerHeight = $('header').outerHeight(); // もしヘッダーがあれば
-
-    var contentHeight = windowHeight - headerHeight - footerHeight;
-    $('.match-wrapper').css('min-height', contentHeight + 'px');
-  }
-
-  adjustWrapperHeight();
-  $(window).resize(function() {
-    adjustWrapperHeight();
-  });
-});
-
-
-
-
-
-
-
-
-
-
-
-$(document).ready(function() {
-  function setSlideHeights() {
-    var matchWrapperHeight = $('.match-wrapper').height();
-    
-    // スライドの高さを調整
-    $('.swiper-slide .slide').each(function() {
-      $(this).css('min-height', matchWrapperHeight + 'px');
-    });
-  }
-
-  // 初期高さの設定
-  setSlideHeights();
-
-  // ウィンドウサイズが変更されたときにも高さを再設定
-  $(window).resize(function() {
-    setSlideHeights();
-  });
-
-  // Swiperがスライド変更したときにも高さを再設定
-  var swiper = new Swiper('.swiper', {
-    on: {
-      slideChange: function () {
-        setSlideHeights();
-      }
-    }
-  });
-});
-
-
-
-
-
-
-
-
-
-</script>
-
 
 
 

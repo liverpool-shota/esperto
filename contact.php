@@ -19,7 +19,7 @@
         </div>
 
         <!-- メニューアイコン -->
-      <div class="menu-icon" id="menuIcon">&#9776;
+      <div class="menu-icon" id="menuIcon">&#9776;</div>
         <div class="sidenav" id="sidenav">
           <a href="javascript:void(0)" class="closebtn" id="closeBtn">&times;</a>
           <ul class="options-lists">
@@ -44,8 +44,6 @@
             </li>
           </ul>
         </div>
-      </div>
-      <!-- <span class= "menu-icon fa fa-bars"></span> -->
       <div class="header-right">
         <ul class="menu-lists">
           <li class="menu-list"><a href="#">TEAM</a>
@@ -82,13 +80,13 @@
             <h2>お問い合わせ</h2>
             <h3>選手募集中、ぜひ一度練習参加を！！<br>練習試合相手も随時募集しています。</h3>
           </div>
-          <form method="post" action="sent.php">
+          <form method="post" action="sent.php" id="contactForm">
             <div class="form-item">お名前（必須）</div>
-            <input type="text" name="name" required>
+            <input type="text" name="name" id="name" required>
             <div class="form-item">メールアドレス（必須）</div>
-            <input type="text" name="email" required>
+            <input type="text" name="email" id="email" required>
             <div class="form-item">年齢</div>
-            <select name="age" required>
+            <select name="age" id="age" required>
               <option value="未選択">選択してください</option>
               <?php
                   $ages = array('10代','20代','30代','40代');
@@ -98,7 +96,7 @@
               ?>
             </select>
             <div class="form-item" >お問い合わせの種類</div>
-            <select name="category" required>
+            <select name="category" id="category" required>
                 <option value="未選択">選択してください</option>
                 <?php
                     $types = array('練習参加','練習試合','その他');
@@ -108,9 +106,10 @@
                 ?>
             </select>
             <div class="form-item">内容</div>
-            <textarea name="body" required></textarea>
+            <textarea name="body" id="body" required></textarea>
             <p><input type="submit" value="送信" class="btn submit"></p>
           </form>
+          <p id="errorMessage" style="color: red;"></p>
         </div>
       </div>
       <footer>
@@ -125,27 +124,49 @@
     <script src="script.js"></script>
 
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-    var menuIcon = document.getElementById("menuIcon");
-    var sidenav = document.getElementById("sidenav");
-    var closeBtn = document.getElementById("closeBtn");
+        document.addEventListener("DOMContentLoaded", function() {
+            var menuIcon = document.getElementById("menuIcon");
+            var sidenav = document.getElementById("sidenav");
+            var closeBtn = document.getElementById("closeBtn");
 
-    menuIcon.addEventListener("click", function() {
-        sidenav.style.width = "250px";
+            menuIcon.addEventListener("click", function() {
+                sidenav.style.width = "250px";
+            });
+
+            closeBtn.addEventListener("click", function() {
+                sidenav.style.width = "0";
+            });
+
+            // Close the sidenav if the user clicks outside of it
+            window.addEventListener("click", function(event) {
+                if (!event.target.matches('#menuIcon') && !event.target.closest('.sidenav')) {
+                    sidenav.style.width = "0";
+                }
+            });
+        });
+    </script>
+
+    <!-- 入力フォームのバリデーション -->
+    <script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+      // 各入力フィールドの値を取得
+      // var name = document.getElementById('name').value.trim();
+      // var email = document.getElementById('email').value.trim();
+      // var message = document.getElementById('message').value.trim();
+
+      // エラーメッセージを表示する要素を取得
+      var errorMessage = document.getElementById('errorMessage');
+      errorMessage.textContent = '';
+
+      // バリデーションチェック
+      if (name === '' || email === '' || age === '' || category === '' || body === '') {
+        // フォーム送信を阻止
+        event.preventDefault();
+        
+        // エラーメッセージを設定
+        errorMessage.textContent = 'すべてのフィールドに入力してください。';
+      }
     });
-
-    closeBtn.addEventListener("click", function() {
-        sidenav.style.width = "0";
-    });
-
-    // Close the sidenav if the user clicks outside of it
-    window.addEventListener("click", function(event) {
-        if (!event.target.matches('#menuIcon') && !event.target.closest('.sidenav')) {
-            sidenav.style.width = "0";
-        }
-    });
-});
-
     </script>
   
     </body>

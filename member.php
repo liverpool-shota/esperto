@@ -7,16 +7,16 @@
 // require_once 'settings\config.php';
 
 // データベース接続情報(localhost)
-define('DB_HOST', 'localhost'); // データベースのホスト名
-define('DB_USER', 'root'); // データベースのユーザー名
-define('DB_PASS', ''); // データベースのパスワード
-define('DB_NAME', 'esperto'); // データベース名
+// define('DB_HOST', 'localhost'); // データベースのホスト名
+// define('DB_USER', 'root'); // データベースのユーザー名
+// define('DB_PASS', ''); // データベースのパスワード
+// define('DB_NAME', 'esperto'); // データベース名
 
 // データベース接続情報
-// define('DB_HOST', 'mysql643.db.sakura.ne.jp'); // データベースのホスト名
-// define('DB_USER', 'esperto'); // データベースのユーザー名
-// define('DB_PASS', 'bell1100'); // データベースのパスワード
-// define('DB_NAME', 'esperto_db'); // データベース名
+define('DB_HOST', 'mysql643.db.sakura.ne.jp'); // データベースのホスト名
+define('DB_USER', 'esperto'); // データベースのユーザー名
+define('DB_PASS', 'bell1100'); // データベースのパスワード
+define('DB_NAME', 'esperto_db'); // データベース名
 
 // データベースへの接続
 try {
@@ -100,7 +100,7 @@ for($i=0; $i<count($row); $i++) {
         <img class="logo" src="img/esp.logo.png">
       </div>
       <!-- メニューアイコン -->
-      <div class="menu-icon" id="menuIcon">&#9776;
+      <div class="menu-icon" id="menuIcon">&#9776;</div>
         <div class="sidenav" id="sidenav">
           <a href="javascript:void(0)" class="closebtn" id="closeBtn">&times;</a>
           <ul class="options-lists">
@@ -125,7 +125,6 @@ for($i=0; $i<count($row); $i++) {
             </li>
           </ul>
         </div>
-      </div>
       <div class="header-right">
         <ul class="menu-lists">
           <li class="menu-list"><a href="#">TEAM</a>
@@ -259,29 +258,28 @@ for($i=0; $i<count($row); $i++) {
       <!-- メニューアイコン -->
     <script src="script.js"></script>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-var menuIcon = document.getElementById("menuIcon");
-var sidenav = document.getElementById("sidenav");
-var closeBtn = document.getElementById("closeBtn");
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var menuIcon = document.getElementById("menuIcon");
+            var sidenav = document.getElementById("sidenav");
+            var closeBtn = document.getElementById("closeBtn");
 
-menuIcon.addEventListener("click", function() {
-    sidenav.style.width = "250px";
-});
+            menuIcon.addEventListener("click", function() {
+                sidenav.style.width = "250px";
+            });
 
-closeBtn.addEventListener("click", function() {
-    sidenav.style.width = "0";
-});
+            closeBtn.addEventListener("click", function() {
+                sidenav.style.width = "0";
+            });
 
-// Close the sidenav if the user clicks outside of it
-window.addEventListener("click", function(event) {
-    if (!event.target.matches('#menuIcon') && !event.target.closest('.sidenav')) {
-        sidenav.style.width = "0";
-    }
-});
-});
-
-</script>
+            // Close the sidenav if the user clicks outside of it
+            window.addEventListener("click", function(event) {
+                if (!event.target.matches('#menuIcon') && !event.target.closest('.sidenav')) {
+                    sidenav.style.width = "0";
+                }
+            });
+        });
+    </script>
 
   </body>
 </html>

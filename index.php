@@ -7,24 +7,31 @@
 // require_once 'settings\config.php';
 
 // データベース接続情報(localhost)
-define('DB_HOST', 'localhost'); // データベースのホスト名
-define('DB_USER', 'root'); // データベースのユーザー名
-define('DB_PASS', ''); // データベースのパスワード
-define('DB_NAME', 'esperto'); // データベース名
+// define('DB_HOST', 'localhost'); // データベースのホスト名
+// define('DB_USER', 'root'); // データベースのユーザー名
+// define('DB_PASS', ''); // データベースのパスワード
+// define('DB_NAME', 'esperto'); // データベース名
 
 // データベース接続情報
-// define('DB_HOST', 'mysql643.db.sakura.ne.jp'); // データベースのホスト名
-// define('DB_USER', 'esperto'); // データベースのユーザー名
-// define('DB_PASS', 'bell1100'); // データベースのパスワード
-// define('DB_NAME', 'esperto_db'); // データベース名
+define('DB_HOST', 'mysql643.db.sakura.ne.jp'); // データベースのホスト名
+define('DB_USER', 'esperto'); // データベースのユーザー名
+define('DB_PASS', 'bell1100'); // データベースのパスワード
+define('DB_NAME', 'esperto_db'); // データベース名
 
 
 
 // リンクのリストをPHPで定義
+// $links = [
+//   "http://localhost/news.php?news_id=1",
+//   "http://localhost/news.php?news_id=2",
+//   "http://localhost/news.php?news_id=3"
+// ];
+
+// リンクのリストをPHPで定義
 $links = [
-  "http://localhost/news.php?news_id=1",
-  "http://localhost/news.php?news_id=2",
-  "http://localhost/news.php?news_id=3"
+  "http://esperto.sakura.ne.jp/news.php?news_id=1",
+  "http://esperto.sakura.ne.jp/news.php?news_id=2",
+  "http://esperto.sakura.ne.jp/news.php?news_id=3"
 ];
 
 
@@ -95,7 +102,7 @@ for($i=0; $i<count($inf); $i++) {
         <img class="logo" src="img/esp.logo.png">
       </div>
       <!-- メニューアイコン -->
-      <div class="menu-icon" id="menuIcon">&#9776;
+      <div class="menu-icon" id="menuIcon">&#9776;</div>
         <div class="sidenav" id="sidenav">
           <a href="javascript:void(0)" class="closebtn" id="closeBtn">&times;</a>
           <ul class="options-lists">
@@ -120,7 +127,6 @@ for($i=0; $i<count($inf); $i++) {
             </li>
           </ul>
         </div>
-      </div>
       <div class="header-right">
         <ul class="menu-lists">
           <li class="menu-list"><a href="#">TEAM</a>
@@ -162,7 +168,8 @@ for($i=0; $i<count($inf); $i++) {
         <div class="swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-watch-progress">
           <div class="swiper-wrapper" id="swiper-wrapper-ee136ddec2d7545b" aria-live="off" style="cursor: grab; transition-duration: 0ms; transform: translate3d(-2488px, 0px, 0px);">
             <?php foreach($results as $result): ?>
-            <a href="http://localhost/detail.php?result_id=<?php echo $result["result_id"]; ?>" class="swiper-slide" role="group" aria-label="Slide" data-swiper-slide-index="<?php echo $result["result_id"]; ?>" style="width: 279px; margin-right: 32px;">
+            <!-- <a href="http://localhost/detail.php?result_id=<?php echo $result["result_id"]; ?>" class="swiper-slide" role="group" aria-label="Slide" data-swiper-slide-index="<?php echo $result["result_id"]; ?>" style="width: 279px; margin-right: 32px;"> -->
+            <a href="http://esperto.sakura.ne.jp/detail.php?result_id=<?php echo $result["result_id"]; ?>" class="swiper-slide" role="group" aria-label="Slide" data-swiper-slide-index="<?php echo $result["result_id"]; ?>" style="width: 279px; margin-right: 32px;">
               <article class="slide">
                 <div class="slide-media img-cover">
                   <img src="img/IMG_3871.JPG" alt="Slide Image">
@@ -203,7 +210,7 @@ for($i=0; $i<count($inf); $i++) {
         <ul class="news">
           <?php foreach($news as $new): ?>
           <li>
-            <a href="http://localhost/news.php?news_id=<?php echo $new["news_id"]; ?>">
+            <!-- <a href="http://localhost/news.php?news_id=<?php echo $new["news_id"]; ?>"> -->
             <a href="http://esperto.sakura.ne.jp/news.php?news_id=<?php echo $new["news_id"]; ?>">
               <dl>
                 <dd>
@@ -229,6 +236,9 @@ for($i=0; $i<count($inf); $i++) {
           <p>クラブ概要</p>
         </div>
         <p class="txt-content">チーム創設２０年を超え、現在京都フットボールリーグ２部を戦う伝統あるチームです。<br>新旧のチカラを融合し、１部リーグ昇格を目標に真剣勝負を楽しんでいます。</p>
+        <p class="about">【主な成績】<br>2015年　京都フットボールリーグ2部　4位<br>2016年　京都フットボールリーグ2部　1位<br>2017年　京都フットボールリーグ2部　1位<br>2018年　京都フットボールリーグ2部　2位<br>
+                                        2019年　京都フットボールリーグ2部　4位<br>2021年　京都フットボールリーグ2部　3位<br>2022年　京都フットボールリーグ2部　4位<br>2023年　京都フットボールリーグ2部　6位
+        </p>
       </div>
     </div>
     <div class="contact-wrapper">
@@ -237,13 +247,13 @@ for($i=0; $i<count($inf); $i++) {
           <h2>CONTACT US</h2>
           <p>お問い合わせ</p>
         </div>
-        <form method="post" action="sent.php">
+        <form method="post" action="sent.php" id="contactForm">
             <div class="form-item">お名前（必須）</div>
-            <input type="text" name="name">
+            <input type="text" name="name" id="name" required>
             <div class="form-item">メールアドレス（必須）</div>
-            <input type="text" name="email">
+            <input type="text" name="email" id="email" required>
             <div class="form-item">年齢</div>
-            <select name="age">
+            <select name="age" id="age" required>
               <option value="未選択">選択してください</option>
               <?php
                   $ages = array('10代','20代','30代','40代');
@@ -253,7 +263,7 @@ for($i=0; $i<count($inf); $i++) {
               ?>
             </select>
             <div class="form-item" >お問い合わせの種類</div>
-            <select name="category">
+            <select name="category" id="category" required>
                 <option value="未選択">選択してください</option>
                 <?php
                     $types = array('練習参加','練習試合','その他');
@@ -263,9 +273,10 @@ for($i=0; $i<count($inf); $i++) {
                 ?>
             </select>
             <div class="form-item">内容</div>
-            <textarea name="body"></textarea>
+            <textarea name="body" id="body" required></textarea>
             <p><input type="submit" value="送信" class="btn submit"></p>
           </form>
+          <p id="errorMessage" style="color: red;"></p>
       </div>
     </div>
     <footer>
@@ -277,7 +288,7 @@ for($i=0; $i<count($inf); $i++) {
     </footer>
 
     <script>
-      var images = ["IMG_3337.JPG", "IMG_3338.JPG", "IMG_3870.JPG"]; // 画像のリスト
+      var images = ["IMG_3337.JPG", "IMG_3972.JPG", "IMG_3870.JPG","IMG_3985.JPG","IMG_3974.JPG"]; // 画像のリスト
       var currentIndex = 0; // 現在の画像のインデックス
 
       function changeBackgroundImg() {
@@ -344,27 +355,49 @@ for($i=0; $i<count($inf); $i++) {
 
     <!-- メニューアイコン -->
     <script src="script.js"></script>
-
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-    var menuIcon = document.getElementById("menuIcon");
-    var sidenav = document.getElementById("sidenav");
-    var closeBtn = document.getElementById("closeBtn");
+        document.addEventListener("DOMContentLoaded", function() {
+            var menuIcon = document.getElementById("menuIcon");
+            var sidenav = document.getElementById("sidenav");
+            var closeBtn = document.getElementById("closeBtn");
 
-    menuIcon.addEventListener("click", function() {
-        sidenav.style.width = "250px";
-    });
+            menuIcon.addEventListener("click", function() {
+                sidenav.style.width = "250px";
+            });
 
-    closeBtn.addEventListener("click", function() {
-        sidenav.style.width = "0";
-    });
+            closeBtn.addEventListener("click", function() {
+                sidenav.style.width = "0";
+            });
 
-    // Close the sidenav if the user clicks outside of it
-    window.addEventListener("click", function(event) {
-        if (!event.target.matches('#menuIcon') && !event.target.closest('.sidenav')) {
-            sidenav.style.width = "0";
-        }
-      });
+            // Close the sidenav if the user clicks outside of it
+            window.addEventListener("click", function(event) {
+                if (!event.target.matches('#menuIcon') && !event.target.closest('.sidenav')) {
+                    sidenav.style.width = "0";
+                }
+            });
+        });
+    </script>
+
+    <!-- 入力フォームのバリデーション -->
+    <script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+      // 各入力フィールドの値を取得
+      // var name = document.getElementById('name').value.trim();
+      // var email = document.getElementById('email').value.trim();
+      // var message = document.getElementById('message').value.trim();
+
+      // エラーメッセージを表示する要素を取得
+      var errorMessage = document.getElementById('errorMessage');
+      errorMessage.textContent = '';
+
+      // バリデーションチェック
+      if (name === '' || email === '' || age === '' || category === '' || body === '') {
+        // フォーム送信を阻止
+        event.preventDefault();
+        
+        // エラーメッセージを設定
+        errorMessage.textContent = 'すべてのフィールドに入力してください。';
+      }
     });
     </script>
     

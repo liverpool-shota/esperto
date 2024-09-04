@@ -1,0 +1,133 @@
+  
+  @media only screen and (min-width: 1024px) {
+    .card01 .swiper {
+      padding-top: 16px;
+    }
+  }
+  
+  .card01 .swiper-area {
+    position: relative;
+  }
+  
+  .card01 .swiper-pagination {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    gap: 1.2rem 0.8rem;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin-top: 3.2rem;
+    text-align: center;
+  }
+  
+  .card01 .swiper-pagination-bullet {
+    width: 1.6rem;
+    height: 3px;
+    cursor: pointer;
+    -webkit-transition: var(--transition);
+    transition: var(--transition);
+    vertical-align: top;
+    background-color: var(--color-gray);
+  }
+  
+  .card01 .swiper-pagination-bullet-active {
+    width: 4rem;
+    background-color: var(--color-theme);
+  }
+  
+  .card01 .swiper-button-prev,
+  .card01 .swiper-button-next {
+    position: absolute;
+    z-index: 10; /* ボタンが画像の上に表示されるようにする */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px; /* ボタンの幅 */
+    height: 48px; /* ボタンの高さ */
+  }
+  
+  .card01 .swiper-button-prev {
+    left: 10px; /* 画像の左側に配置 */
+  }
+  
+  .card01 .swiper-button-next {
+    right: 10px; /* 画像の右側に配置 */
+  }
+  
+  @media only screen and (max-width: 1024px) {
+    .card01 .swiper-button-prev::before,
+    .card01 .swiper-button-next::before {
+      background-color: rgba(0, 0, 0, 0.3);
+      -webkit-box-shadow: var(--box-shadow-dark);
+      box-shadow: var(--box-shadow-dark);
+    }
+  }
+  
+  @media only screen and (max-width: 1024px) {
+    .card01 .swiper-button-prev::after,
+    .card01 .swiper-button-next::after {
+      border-color: #fff;
+    }
+  }
+  
+  @media only screen and (min-width: 1025px) {
+    .card01 .slide {
+      -webkit-transition: var(--transition);
+      transition: var(--transition);
+    }
+    .card01 .slide img {
+      -webkit-transition: var(--transition);
+      transition: var(--transition);
+    }
+    .card01 .slide:hover {
+      -webkit-transform: translateY(-16px);
+      transform: translateY(-16px);
+    }
+    .card01 .slide:hover img {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+  }
+  
+  .card01 .slide-media {
+    position: relative; /* 親要素を相対位置にする */
+    padding-top: 62.5%;
+    border-radius: 4px;
+  }
+  
+  .card01 .slide-media img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transform: translateY(-16px);
+    transform: translateY(-16px);
+  }
+  
+  .card01 .slide-content {
+    padding: 3.2rem 0;
+  }
+  
+  .card01 .slide-date {
+    font-size: 1.2rem;
+    line-height: 1;
+    display: block;
+    color: var(--color-theme);
+  }
+  
+  .card01 .slide-title {
+    line-height: 1.6;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    height: 3.2em;
+    margin-top: 1.6rem;
+  }
+  
